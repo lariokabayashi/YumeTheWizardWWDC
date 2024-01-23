@@ -2,16 +2,15 @@ import SwiftUI
 import SpriteKit
 
 struct ContentView: View {
-    var gameScene: SKScene {
-        let gameScene = SKScene(fileNamed: "GameController")
-        gameScene?.scaleMode = .aspectFit
-        
-        return gameScene!
+    var scene: SKScene {
+        let scene = GameScene()
+        scene.size = CGSize(width: 300, height: 400)
+        scene.scaleMode = .fill
+        return scene
     }
     var body: some View {
-        GeometryReader { geometry in
-            SpriteView(scene: gameScene)
-            .frame(width: geometry.size.width, height: geometry.size.height)
-        }.edgesIgnoringSafeArea(.all)
+        SpriteView(scene: scene)
+            .frame(width: 300, height: 400)
+            .ignoresSafeArea()
     }
 }

@@ -21,5 +21,8 @@ struct ContentView: View {
             SpriteView(scene: scene)
             .frame(width: geometry.size.width, height: geometry.size.height)
         }.edgesIgnoringSafeArea(.all)
+        .onAppear {
+            Bundle.main.url(forResource: "Resources/KikiTheWizardImageClassifier 1", withExtension:"mlmodel")
+        }
     }
 }

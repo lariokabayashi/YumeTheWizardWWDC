@@ -17,20 +17,16 @@ let package = Package(
             name: "KikiTheWizard",
             targets: ["AppModule"],
             bundleIdentifier: "com.LarissaOkabayashi.KikiTheWizard",
-            teamIdentifier: "QS932KTLCZ",
             displayVersion: "1.0",
             bundleVersion: "1",
-            appIcon: .placeholder(icon: .mic),
+            appIcon: .asset("AppIcon"),
             accentColor: .presetColor(.purple),
             supportedDeviceFamilies: [
                 .pad,
-                .phone
             ],
             supportedInterfaceOrientations: [
-                .portrait,
                 .landscapeRight,
-                .landscapeLeft,
-                .portraitUpsideDown(.when(deviceFamilies: [.pad]))
+                .landscapeLeft
             ]
         )
     ],
@@ -39,7 +35,7 @@ let package = Package(
             name: "AppModule",
             path: ".",
             resources: [
-                .process("Resources")
+                .copy("media")
             ]
         )
     ]

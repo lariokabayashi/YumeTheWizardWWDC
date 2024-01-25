@@ -21,7 +21,7 @@ class GameScene: SKScene {
     
     let arrow: SKSpriteNode = SKSpriteNode(imageNamed: "arrow")
     
-    let topText = SKLabelNode(fontNamed: "PixelifySans-VariableFont_wght")
+    let topText = SKLabelNode(fontNamed: "Pixelify")
     
     var page: Int = 0
     

@@ -22,7 +22,7 @@ struct ContentView: View {
             .frame(width: geometry.size.width, height: geometry.size.height)
         }.edgesIgnoringSafeArea(.all)
         .onAppear {
-            Bundle.main.url(forResource: "media/KikiTheWizardImageClassifier 1", withExtension:"mlmodel")
+            Bundle.main.url(forResource: "media/KikiTheWizardImageClassifier", withExtension:"mlmodel")
             Bundle.main.url(forResource: "media/Pixelify", withExtension:"ttf")
         }
     }

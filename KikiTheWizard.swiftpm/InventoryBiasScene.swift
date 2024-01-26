@@ -44,9 +44,12 @@ class InventoryBiasScene: SKScene {
     
     override func didMove(to view: SKView) {
         do{
-            let mlModel = try KikiTheWizardImageClassifier_1(configuration: MLModelConfiguration()).model
-        }
-        catch{
+            let model = try KikiTheWizardImageClassifier_1(contentsOf: KikiTheWizardImageClassifier_1.urlOfModelInThisBundle).model
+            let prediction = predict(model: model, image: UIImage.init(named: "image 84-17")!)
+            
+            print(prediction)
+          
+        }catch {
             print(error.localizedDescription)
         }
         
@@ -83,6 +86,10 @@ class InventoryBiasScene: SKScene {
         if let touch = touches.first, let node = currentNode {
             let touchLocation = touch.location(in: self)
             node.position = touchLocation
+            
+            if ((node.position.x > box.position.x - 50 && node.position.x < box.position.x + 50) && (node.position.y > box.position.y - 50 && node.position.y < box.position.y + 50) ){
+                node.removeFromParent()
+            }
         }
     }
     

@@ -17,12 +17,14 @@ let package = Package(
             name: "KikiTheWizard",
             targets: ["AppModule"],
             bundleIdentifier: "com.LarissaOkabayashi.KikiTheWizard",
+            teamIdentifier: "QS932KTLCZ",
             displayVersion: "1.0",
             bundleVersion: "1",
             appIcon: .asset("AppIcon"),
             accentColor: .presetColor(.purple),
             supportedDeviceFamilies: [
                 .pad,
+                .phone
             ],
             supportedInterfaceOrientations: [
                 .landscapeRight,

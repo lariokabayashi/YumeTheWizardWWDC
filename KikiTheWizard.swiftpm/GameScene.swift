@@ -7,8 +7,11 @@
 
 import Foundation
 import SpriteKit
+import SwiftUI
+import Metal
 
 class GameScene: SKScene {
+    
     var background: SKSpriteNode = SKSpriteNode(imageNamed: "background")
     
     let wallpaper: SKSpriteNode = SKSpriteNode(imageNamed: "background")
@@ -21,7 +24,7 @@ class GameScene: SKScene {
     
     let arrow: SKSpriteNode = SKSpriteNode(imageNamed: "arrow")
     
-    let topText = SKLabelNode(fontNamed: "Pixelify")
+//    let topText = SKLabelNode(fontNamed: "Pixelify")
     
     var page: Int = 0
     
@@ -36,7 +39,11 @@ class GameScene: SKScene {
         SKTexture(imageNamed: "cloud 8")
     ]
     
+    let cat = SKSpriteNode(imageNamed: "image 84-17")
+    let dog = SKSpriteNode(imageNamed: "image 84-8")
+    
     override func didMove(to view: SKView) {
+//        CTFontManagerRegisterFontsForURL(cfURL, CTFontManagerScope.process, nil)
         
         wallpaper.position = CGPoint(x: view.frame.width / 2, y: view.frame.height / 2)
         addChild(wallpaper)
@@ -49,6 +56,27 @@ class GameScene: SKScene {
         ground.size = CGSize(width: 1000, height: 1000)
         ground.position = CGPoint(x: view.frame.width / 2, y: 160)
         addChild(ground)
+
+//        cat.color = UIColor.darkGray
+//        cat.colorBlendFactor = 1
+        
+//        cat.zPosition = 1
+//        cat.position =  CGPoint(x: view.frame.width / 2 - 100, y: view.frame.height / 2)
+//        addChild(cat)
+//        
+//        let image = UIImage(cgImage: (cat.texture?.cgImage())!)
+//        
+//        let catColoredSprite = SKSpriteNode(texture:SKTexture(image: image))
+//        
+//        catColoredSprite.zPosition = 1
+//        catColoredSprite.position =  CGPoint(x: view.frame.width / 2, y: view.frame.height / 2)
+//        
+//        let originalImage = UIImage(named: "image 84-17")?.withTintColor(.systemPink, renderingMode: .alwaysTemplate)
+//        
+//        let ColoredImageSprite = SKSpriteNode(texture:SKTexture(image: originalImage!))
+//        ColoredImageSprite.position =  CGPoint(x: view.frame.width / 2, y: view.frame.height / 2)
+//        ColoredImageSprite.zPosition = 1
+//        addChild(ColoredImageSprite)
         
         kiki.position = CGPoint(x: view.frame.width / 2, y: view.frame.height / 2)
         addChild(kiki)
@@ -59,6 +87,15 @@ class GameScene: SKScene {
         arrow.position = CGPoint(x: 1020, y: 700)
         arrow.name = "arrow"
         addChild(arrow)
+        
+//        arrow.color = UIColor.green
+//        arrow.colorBlendFactor = 1
+        
+        let action = SKAction.colorize(with: UIColor.brown, colorBlendFactor: 1, duration: 1)
+        
+        arrow.run(action)
+        
+        let topText = getFont()
         
         topText.text = "Oi, meu nome é kiki, sou uma feiticeira aprendiz"
         topText.fontSize = 30
@@ -72,6 +109,8 @@ class GameScene: SKScene {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let topText = getFont()
+        
          for touch in touches {
               let location = touch.location(in: self)
               let touchedNode = atPoint(location)
@@ -107,4 +146,12 @@ class GameScene: SKScene {
               }
          }
     }
+    func getFont() -> SKLabelNode{
+            let cfURL = Bundle.main.url(forResource: "media/Pixelify", withExtension: "ttf")! as CFURL
+
+            CTFontManagerRegisterFontsForURL(cfURL, CTFontManagerScope.process, nil)
+            
+            let topText = SKLabelNode(fontNamed: "Pixelify")
+            return topText
+        }
 }

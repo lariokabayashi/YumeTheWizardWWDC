@@ -29,6 +29,11 @@ let package = Package(
             supportedInterfaceOrientations: [
                 .landscapeRight,
                 .landscapeLeft
+            ],
+            capabilities: [
+                .fileAccess(.userSelectedFiles, mode: .readWrite),
+                .fileAccess(.downloadsFolder, mode: .readWrite),
+                .fileAccess(.pictureFolder, mode: .readWrite)
             ]
         )
     ],

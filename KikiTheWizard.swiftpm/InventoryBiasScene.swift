@@ -53,15 +53,6 @@ class InventoryBiasScene: SKScene {
     ]
     
     override func didMove(to view: SKView) {
-        do{
-            let model = try KikiTheWizardImageClassifier_1(contentsOf: KikiTheWizardImageClassifier_1.urlOfModelInThisBundle).model
-            let prediction = predict(model: model, image: UIImage.init(named: "image 84-17")!)
-            
-            print(prediction)
-          
-        }catch {
-            print(error.localizedDescription)
-        }
         
         inventory.position = CGPoint(x: view.frame.width / 2, y: view.frame.height / 2)
         addChild(inventory)
@@ -79,7 +70,7 @@ class InventoryBiasScene: SKScene {
         labelText.position = CGPoint(x: view.frame.width / 4.75, y: view.frame.height / 2.25)
         labelText.text = "Box Of Cats"
         labelText.fontSize = 20
-        labelText.fontColor = UIColor.black
+        labelText.fontColor = UIColor.white
         addChild(labelText)
         
         box.position = CGPoint(x: view.frame.width / 4.1, y: view.frame.height / 4.63)
@@ -174,7 +165,7 @@ class InventoryBiasScene: SKScene {
             labelText.text = "Box Of Dogs"
         }
         if goneDogs == 10{
-            let nextScene = GameScene()
+            let nextScene = MagicScene()
             nextScene.size = CGSize(width: 1194, height: 834)
             nextScene.scaleMode = .aspectFill
             view?.presentScene(nextScene)

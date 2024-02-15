@@ -1,6 +1,7 @@
 import SwiftUI
 import SpriteKit
 
+@available(iOS 17.0, *)
 struct ContentView: View {
     
     var scene: SKScene {
@@ -10,6 +11,7 @@ struct ContentView: View {
         return scene
     }
     
+    
     var body: some View {
         
         GeometryReader { geometry in
@@ -18,7 +20,11 @@ struct ContentView: View {
         }.edgesIgnoringSafeArea(.all)
         .onAppear {
             Bundle.main.url(forResource: "media/KikiTheWizardImageClassifier", withExtension:"mlmodel")
-            Bundle.main.url(forResource: "media/Pixelify", withExtension:"ttf")
+            let cfURL = Bundle.main.url(forResource: "media/Pixelify", withExtension: "ttf")! as CFURL
+
+            CTFontManagerRegisterFontsForURL(cfURL, CTFontManagerScope.process, nil)
+
+            let font = UIFont(name: "PixelifySans-VariableFont_wght.ttf", size:  14.0)
         }
     }
 }

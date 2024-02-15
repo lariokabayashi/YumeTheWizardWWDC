@@ -8,6 +8,7 @@
 import Foundation
 import SpriteKit
 
+@available(iOS 17.0, *)
 class MagicScene: SKScene {
     var background: SKSpriteNode = SKSpriteNode(imageNamed: "background")
     
@@ -25,7 +26,7 @@ class MagicScene: SKScene {
     
     let sparkles: SKSpriteNode = SKSpriteNode(imageNamed: "image 109")
     
-    let topText = SKLabelNode(fontNamed: "Pixelify")
+    let topText = SKLabelNode(fontNamed: "Pixelify Sans")
     
     var page: Int = 0
 
@@ -92,9 +93,11 @@ class MagicScene: SKScene {
         arrow.name = "arrow"
         addChild(arrow)
         
-        topText.text = "Muito bem, agora temos tudo preparado para realizar o feitiço"
+        topText.text = "Very well, now we have everything prepared to perform the spell."
         topText.fontSize = 30
-        topText.position = CGPoint(x: 580, y: 710)
+        topText.preferredMaxLayoutWidth = 900
+        topText.numberOfLines = 2
+        topText.position = CGPoint(x: 560, y: 680)
         topText.fontColor = UIColor.black
         addChild(topText)
     }

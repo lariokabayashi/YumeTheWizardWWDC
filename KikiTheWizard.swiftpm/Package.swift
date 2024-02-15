@@ -21,7 +21,7 @@ let package = Package(
             displayVersion: "1.0",
             bundleVersion: "1",
             appIcon: .asset("AppIcon"),
-            accentColor: .presetColor(.purple),
+            accentColor: .presetColor(.mint),
             supportedDeviceFamilies: [
                 .pad,
                 .phone
@@ -34,7 +34,8 @@ let package = Package(
                 .fileAccess(.userSelectedFiles, mode: .readWrite),
                 .fileAccess(.downloadsFolder, mode: .readWrite),
                 .fileAccess(.pictureFolder, mode: .readWrite)
-            ]
+            ],
+            appCategory: .games
         )
     ],
     targets: [

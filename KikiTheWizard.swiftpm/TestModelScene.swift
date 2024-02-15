@@ -8,6 +8,7 @@
 import Foundation
 import SpriteKit
 
+@available(iOS 17.0, *)
 class TestModelScene: SKScene{
     var background: SKSpriteNode = SKSpriteNode(imageNamed: "background")
     
@@ -15,7 +16,7 @@ class TestModelScene: SKScene{
     
     let ground: SKSpriteNode = SKSpriteNode(imageNamed: "ground")
     
-    let kiki: SKSpriteNode = SKSpriteNode(imageNamed: "kiki-in-front")
+    let kiki: SKSpriteNode = SKSpriteNode(imageNamed: "feitiço-1")
     
     let board: SKSpriteNode = SKSpriteNode(imageNamed: "board")
     
@@ -25,11 +26,13 @@ class TestModelScene: SKScene{
     
     let box: SKSpriteNode = SKSpriteNode(imageNamed: "box-close")
     
-    let topText = SKLabelNode(fontNamed: "Pixelify")
+    let topText = SKLabelNode(fontNamed: "Pixelify Sans")
+    let auxText1 = SKLabelNode(fontNamed: "Pixelify Sans")
+    let auxText2 = SKLabelNode(fontNamed: "Pixelify Sans")
     
     let inventoryTest = SKSpriteNode(imageNamed: "innventory-test")
     
-    let kikiLabel = SKLabelNode(fontNamed: "Pixelify")
+    let kikiLabel = SKLabelNode(fontNamed: "Pixelify Sans")
     
     let contour = SKSpriteNode(imageNamed: "frame")
     let contour2 = SKSpriteNode(imageNamed: "frame")
@@ -40,9 +43,9 @@ class TestModelScene: SKScene{
     
     let catTest2 = SKSpriteNode(imageNamed: "cat-test2")
     
-    let dogTest1 = SKSpriteNode(imageNamed: "dog-test")
+    let catTest3 = SKSpriteNode(imageNamed: "image 212")
     
-    let dogTest2 = SKSpriteNode(imageNamed: "dog-test2")
+    let catTest4 = SKSpriteNode(imageNamed: "image 211")
     
     private var currentNode: SKNode?
     
@@ -54,6 +57,8 @@ class TestModelScene: SKScene{
     
     let kikiBlink = SKSpriteNode(imageNamed: "kiki-animation1")
 
+    let sparkles: SKSpriteNode = SKSpriteNode(imageNamed: "image 109")
+    
     let animationIdle: [SKTexture] = [
         SKTexture(imageNamed: "cloud 1"),
         SKTexture(imageNamed: "cloud 2"),
@@ -69,6 +74,29 @@ class TestModelScene: SKScene{
         SKTexture(imageNamed: "kiki-animation1"),
         SKTexture(imageNamed: "kiki-animation2"),
         SKTexture(imageNamed: "kiki-animation3")
+    ]
+    let animationIdleBox: [SKTexture] = [
+        SKTexture(imageNamed: "box-close"),
+        SKTexture(imageNamed: "báu")
+    ]
+
+    let animationIdleMagic: [SKTexture] = [
+        SKTexture(imageNamed: "feitiço-1"),
+        SKTexture(imageNamed: "feitiço-2"),
+        SKTexture(imageNamed: "feitiço-3"),
+        SKTexture(imageNamed: "feitiço-4"),
+        SKTexture(imageNamed: "feitiço-5")
+    ]
+    
+    let animationIdleSparkles: [SKTexture] = [
+        SKTexture(imageNamed: "image 109"),
+        SKTexture(imageNamed: "image 110"),
+        SKTexture(imageNamed: "image 111"),
+        SKTexture(imageNamed: "image 112"),
+        SKTexture(imageNamed: "image 113"),
+        SKTexture(imageNamed: "image 114"),
+        SKTexture(imageNamed: "image 115"),
+        SKTexture(imageNamed: "image 116")
     ]
     override func didMove(to view: SKView) {
         
@@ -112,16 +140,16 @@ class TestModelScene: SKScene{
         contour2.position = CGPoint(x: view.frame.width / 1.07, y: 500)
         addChild(contour2)
         
-        dogTest1.position = CGPoint(x: view.frame.width / 1.075, y: 320)
-        dogTest1.name = "draggable-dogTest1"
-        addChild(dogTest1)
+        catTest3.position = CGPoint(x: view.frame.width / 1.075, y: 320)
+        catTest3.name = "draggable-catTest3"
+        addChild(catTest3)
         
         contour3.position = CGPoint(x: view.frame.width / 1.07, y: 320)
         addChild(contour3)
         
-        dogTest2.position = CGPoint(x: view.frame.width / 1.07, y: 140)
-        dogTest2.name = "draggable-dogTest2"
-        addChild(dogTest2)
+        catTest4.position = CGPoint(x: view.frame.width / 1.07, y: 140)
+        catTest4.name = "draggable-catTest4"
+        addChild(catTest4)
         
         contour4.position = CGPoint(x: view.frame.width / 1.07, y: 140)
         addChild(contour4)
@@ -151,7 +179,7 @@ class TestModelScene: SKScene{
         kikiLabel.zPosition = -1
         addChild(kikiLabel)
         
-        topText.text = "Vamos ver se ele funciona, coloque dentro da caixa algum gato ou cachorro"
+        topText.text = "Let's see if it works, put a cat or a dog inside the box"
         topText.fontSize = 30
         topText.position = CGPoint(x: 480, y: 690)
         topText.fontColor = UIColor.black
@@ -160,6 +188,31 @@ class TestModelScene: SKScene{
         topText.preferredMaxLayoutWidth = 800
         topText.numberOfLines = 3
         addChild(topText)
+        
+        auxText1.fontSize = 25
+        auxText1.position = CGPoint(x: 750, y: 390)
+        auxText1.fontColor = UIColor.black
+        auxText1.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
+        auxText1.lineBreakMode = NSLineBreakMode.byWordWrapping
+        auxText1.preferredMaxLayoutWidth = 600
+        auxText1.numberOfLines = 3
+        auxText1.zPosition = -1
+        addChild(auxText1)
+        
+        auxText2.fontSize = 25
+        auxText2.position = CGPoint(x: 750, y: 260)
+        auxText2.fontColor = UIColor.black
+        auxText2.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
+        auxText2.lineBreakMode = NSLineBreakMode.byWordWrapping
+        auxText2.preferredMaxLayoutWidth = 600
+        auxText2.numberOfLines = 3
+        auxText2.zPosition = -1
+        addChild(auxText2)
+        
+        sparkles.position = CGPoint(x: view.frame.width / 2, y: view.frame.height / 4.5)
+        sparkles.zPosition = -1
+        addChild(sparkles)
+    
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
@@ -177,15 +230,80 @@ class TestModelScene: SKScene{
                 else if page == 2{
                     board.zPosition = -1
                     topText.position = CGPoint(x: 750, y: 350)
-                    topText.fontSize = 35
+                    topText.fontSize = 25
                     topText.text = "Interpretability allows people to understand how decisions are made, making processes more transparent and accountable."
                     topText.preferredMaxLayoutWidth = 600
                     topText.numberOfLines = 5
                     topText.zPosition = 2
-                    arrow.position = CGPoint(x: 920, y: 300)
+                    arrow.zPosition = 3
+                    arrow.position = CGPoint(x: 1000, y: 250)
                     comment.zPosition = 1
                     kikiLabel.zPosition = 2
                     kikiBlink.zPosition = 1
+                    page += 1
+                }
+                else if page == 3{
+                    topText.text = "Interpreting the model, I realized that the dataset was biased, which is why the box incorrectly predicted that cats were dogs"
+                    page += 1
+                }
+                else if page == 4{
+                    topText.position = CGPoint(x: 750, y: 520)
+                    topText.text = "To reduce bias in the Dataset we will:"
+                    
+                    auxText1.zPosition = 1
+                    auxText1.text = "1. Make sure the training dataset is representative of the actual distribution of classes and features"
+                    
+                    auxText2.zPosition = 1
+                    auxText2.text = "2. Increase the dataset to increase sample diversity, especially for underrepresented classes or groups."
+                    page += 1
+                }
+                else if page == 5{
+                    catTest1.removeFromParent()
+                    catTest2.removeFromParent()
+                    catTest3.removeFromParent()
+                    catTest4.removeFromParent()
+                    board.zPosition = 1
+                    comment.zPosition = -1
+                    kikiLabel.zPosition = -1
+                    kikiBlink.zPosition = -1
+                    auxText1.zPosition = -1
+                    auxText2.zPosition = -1
+                    inventoryTest.zPosition = -1
+                    contour.zPosition = -1
+                    contour2.zPosition = -1
+                    contour3.zPosition = -1
+                    contour4.zPosition = -1
+                    arrow180.zPosition = -1
+                    arrow.position = CGPoint(x: 1020, y: 700)
+                    ground.size = CGSize(width: 1000, height: 1000)
+                    ground.position = CGPoint(x: 597, y: 160)
+                    kiki.position = CGPoint(x: 597, y: 417)
+                    board.position = CGPoint(x: 597, y: 720)
+                    
+                    topText.fontSize = 30
+                    topText.position = CGPoint(x: 520, y: 690)
+                    topText.fontColor = UIColor.black
+                    topText.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
+                    topText.lineBreakMode = NSLineBreakMode.byWordWrapping
+                    topText.preferredMaxLayoutWidth = 800
+                    topText.numberOfLines = 2
+                    topText.text = "Nice! the box has been improved, now let's test it"
+                    box.position = CGPoint(x: 597, y: 217)
+                    box.size = CGSize(width: 200, height: 200)
+                    box.run(.animate(with: animationIdleBox, timePerFrame: 1))
+                    
+                    kiki.run(.animate(with: animationIdleMagic, timePerFrame: 0.5))
+                   
+                    sparkles.zPosition = 1
+                    sparkles.run(.animate(with: animationIdleSparkles, timePerFrame: 0.3))
+    
+                    page += 1
+                }
+                else if page == 6{
+                    let nextScene = buildYourAnimalScene()
+                    nextScene.size = CGSize(width: 1194, height: 834)
+                    nextScene.scaleMode = .aspectFill
+                    view?.presentScene(nextScene)
                 }
             }
         }
@@ -222,28 +340,28 @@ class TestModelScene: SKScene{
                         let prediction = modelPredict(fileImg: "cat-test")
                         topText.text = "Box says: It's a " + prediction + "!"
                         node.removeFromParent()
+                        animalsMissed += 1
                     }
                     else if separated[1] == "catTest2"{
                         let prediction = modelPredict(fileImg: "cat-test2")
                         topText.text = "Box says: It's a " + prediction + "!"
                         node.removeFromParent()
+                        animalsMissed += 1
                     }
                     else if separated[1] == "dogTest1"{
                         let prediction = modelPredict(fileImg: "dog-test")
                         topText.text = "Box says: It's a " + prediction + "!"
                         node.removeFromParent()
+                        animalsMissed += 1
                     }
                     else if separated[1] == "dogTest2"{
                         let prediction = modelPredict(fileImg: "dog-test2")
                         topText.text = "Box says: It's a " + prediction + "!"
                         node.removeFromParent()
+                        animalsMissed += 1
                     }
-                    animalsMissed += 1
+                    arrow.zPosition = 1
                 }
-            }
-            if animalsMissed == 4{
-                topText.text = "Saw? The spell isn't working"
-                arrow.zPosition = 1
             }
         }
     }

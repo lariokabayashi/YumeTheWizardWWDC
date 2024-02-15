@@ -9,13 +9,17 @@ import Foundation
 import SpriteKit
 import CoreML
 
+@available(iOS 17.0, *)
 class InventoryBiasScene: SKScene {
     
-    let inventory: SKSpriteNode = SKSpriteNode(imageNamed: "inventory-oficial")
-    let topText: SKLabelNode = SKLabelNode(fontNamed: "Pixelify")
-    let labelText: SKLabelNode = SKLabelNode(fontNamed: "Pixelify")
-    let box: SKSpriteNode = SKSpriteNode(imageNamed: "box")
-    let kiki: SKSpriteNode = SKSpriteNode(imageNamed: "kiki-animation1")
+    let inventory: SKSpriteNode = SKSpriteNode(imageNamed: "inventoryy")
+    let topText: SKLabelNode = SKLabelNode(fontNamed: "Pixelify Sans")
+    let DogText: SKLabelNode = SKLabelNode(fontNamed: "Pixelify Sans")
+    let labelText: SKLabelNode = SKLabelNode(fontNamed: "Pixelify Sans")
+    let boxCats: SKSpriteNode = SKSpriteNode(imageNamed: "box")
+    let boxDogs: SKSpriteNode = SKSpriteNode(imageNamed: "box")
+    let cat: SKSpriteNode = SKSpriteNode(imageNamed: "image 252")
+    let dog: SKSpriteNode = SKSpriteNode(imageNamed: "image 247")
     let obj_1: SKSpriteNode = SKSpriteNode(imageNamed: "image 84-1")
     let obj_2: SKSpriteNode = SKSpriteNode(imageNamed: "image 84-2")
     let obj_3: SKSpriteNode = SKSpriteNode(imageNamed: "image 84-3")
@@ -43,13 +47,19 @@ class InventoryBiasScene: SKScene {
     let obj_25: SKSpriteNode = SKSpriteNode(imageNamed: "image 89")
     var goneCats: Int = 0
     var goneDogs: Int = 0
-    var IsTheBoxOfCats = true
     private var currentNode: SKNode?
     
-    let animationIdle: [SKTexture] = [
-        SKTexture(imageNamed: "kiki-animation1"),
-        SKTexture(imageNamed: "kiki-animation2"),
-        SKTexture(imageNamed: "kiki-animation3")
+    let animationIdleDog: [SKTexture] = [
+        SKTexture(imageNamed: "image 247"),
+        SKTexture(imageNamed: "image 248"),
+        SKTexture(imageNamed: "image 249"),
+        SKTexture(imageNamed: "image 251")
+    ]
+    
+    let animationIdleCat: [SKTexture] = [
+        SKTexture(imageNamed: "image 252"),
+        SKTexture(imageNamed: "image 253"),
+        SKTexture(imageNamed: "image 246")
     ]
     
     override func didMove(to view: SKView) {
@@ -57,30 +67,44 @@ class InventoryBiasScene: SKScene {
         inventory.position = CGPoint(x: view.frame.width / 2, y: view.frame.height / 2)
         addChild(inventory)
         
-        topText.position = CGPoint(x: view.frame.width / 4.5, y: view.frame.height / 1.7)
-        topText.text = "Arraste para dentro da caixa os gatos do inventário"
+        topText.position = CGPoint(x: view.frame.width / 8, y: view.frame.height / 1.8)
+        topText.text = "Drag the cats from the inventory into the box."
         topText.fontSize = 20
         topText.fontColor = UIColor.black
         topText.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
+//        topText.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
         topText.lineBreakMode = NSLineBreakMode.byWordWrapping
         topText.preferredMaxLayoutWidth = 160
-        topText.numberOfLines = 5
+        topText.numberOfLines = 4
         addChild(topText)
         
-        labelText.position = CGPoint(x: view.frame.width / 4.75, y: view.frame.height / 2.25)
-        labelText.text = "Box Of Cats"
-        labelText.fontSize = 20
-        labelText.fontColor = UIColor.white
-        addChild(labelText)
+        DogText.position = CGPoint(x: view.frame.width / 1.15, y: view.frame.height / 1.8)
+        DogText.text = "Drag the dogs from the inventory into the box."
+        DogText.fontSize = 20
+        DogText.fontColor = UIColor.black
+        DogText.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
+//        topText.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
+        DogText.lineBreakMode = NSLineBreakMode.byWordWrapping
+        DogText.preferredMaxLayoutWidth = 160
+        DogText.numberOfLines = 4
+        addChild(DogText)
         
-        box.position = CGPoint(x: view.frame.width / 4.1, y: view.frame.height / 4.63)
-        addChild(box)
+        cat.position = CGPoint(x: view.frame.width / 8, y: view.frame.height / 1.24)
+        addChild(cat)
+        cat.run(.repeatForever(.animate(with: animationIdleCat, timePerFrame: 0.4)))
         
-        kiki.position = CGPoint(x: view.frame.width / 4.7, y: view.frame.height / 1.135)
-//        kiki.size = CGSize(width: 182, height: 196)
-        addChild(kiki)
+        dog.position = CGPoint(x: view.frame.width / 1.14, y: view.frame.height / 1.23)
+        addChild(dog)
+        dog.run(.repeatForever(.animate(with: animationIdleDog, timePerFrame: 0.4)))
         
-        kiki.run(.repeatForever(.animate(with: animationIdle, timePerFrame: 0.5)))
+        
+        boxCats.position = CGPoint(x: view.frame.width / 7, y: view.frame.height / 4.63)
+        boxCats.size = CGSize(width: boxCats.size.width/1.5, height: boxCats.size.height/1.5)
+        addChild(boxCats)
+        
+        boxDogs.position = CGPoint(x: view.frame.width / 1.107, y: view.frame.height / 4.63)
+        boxDogs.size = CGSize(width: boxDogs.size.width/1.5, height: boxDogs.size.height/1.5)
+        addChild(boxDogs)
         
         createObj()
         obj_1.name = "draggable-Dog"
@@ -122,8 +146,6 @@ class InventoryBiasScene: SKScene {
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        topText.text = "Arraste para dentro da caixa os gatos do inventário"
-        
         if let touch = touches.first, let node = currentNode {
             let touchLocation = touch.location(in: self)
             node.position = touchLocation
@@ -131,40 +153,36 @@ class InventoryBiasScene: SKScene {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        self.currentNode = nil
         if let touch = touches.first, let node = currentNode {
-            if ((node.position.x > box.position.x - 50 && node.position.x < box.position.x + 50) && (node.position.y > box.position.y - 50 && node.position.y < box.position.y + 50) ){
+            if ((node.position.x > boxCats.position.x - 50 && node.position.x < boxCats.position.x + 50) && (node.position.y > boxCats.position.y - 50 && node.position.y < boxCats.position.y + 50) ){
                 
                 let nodeName = node.name ?? "draggable-"
                 let fullNameArr = nodeName.components(separatedBy: "-")
                 var lastName: String = fullNameArr[1]
                 
-                if IsTheBoxOfCats{
-                    if lastName == "Cat"{
-                        node.removeFromParent()
-                        goneCats += 1
-                    }
-                    else if lastName == "Dog"{
-                        topText.text = "Isso não é um gato!"
-                    }
+                if lastName == "Cat"{
+                    node.removeFromParent()
+                    goneCats += 1
                 }
-                else{
+                else if lastName == "Dog"{
+                    topText.text = "That's not a cat!"
+                }
+            }
+            
+            if ((node.position.x > boxDogs.position.x - 50 && node.position.x < boxDogs.position.x + 50) && (node.position.y > boxDogs.position.y - 50 && node.position.y < boxDogs.position.y + 50) ){
+                    let nodeName = node.name ?? "draggable-"
+                    let fullNameArr = nodeName.components(separatedBy: "-")
+                    var lastName: String = fullNameArr[1]
                     if lastName == "Dog"{
                         node.removeFromParent()
                         goneDogs += 1
                     }
-                    else if lastName == "Dog"{
-                        topText.text = "Isso não é um cachorro!"
-                    }
+                    else if lastName == "Cat"{
+                        DogText.text = "That's not a dog!"
                 }
             }
         }
-        if goneCats == 10{
-            topText.text = "Agora arraste para essa outra caixa os cachorros"
-            IsTheBoxOfCats = false
-            labelText.text = "Box Of Dogs"
-        }
-        if goneDogs == 10{
+        if goneCats == 10 && goneDogs == 10{
             let nextScene = MagicScene()
             nextScene.size = CGSize(width: 1194, height: 834)
             nextScene.scaleMode = .aspectFill
@@ -178,8 +196,8 @@ class InventoryBiasScene: SKScene {
     
     func createObj(){
         let obj: [SKSpriteNode] = [obj_1, obj_2, obj_21, obj_3, obj_4, obj_5,obj_22, obj_6, obj_7, obj_8, obj_9, obj_10, obj_23, obj_11, obj_12, obj_13, obj_14, obj_15, obj_16, obj_17,obj_24, obj_18, obj_19, obj_20, obj_25]
-        var x: Int = 550
-        var y: Int = 150
+        var x: Int = 360
+        var y: Int = 140
         for i in 0...24{
             obj[i].position = CGPoint(x: x , y: y)
     //        kiki.size = CGSize(width: 179, height: 251)
@@ -187,7 +205,7 @@ class InventoryBiasScene: SKScene {
             addChild(obj[i])
             x += 120
             if ((i + 1) % 5 == 0 && i != 0){
-                x = 550
+                x = 360
                 y += 140
             }
         }

@@ -31,9 +31,7 @@ let package = Package(
                 .landscapeLeft
             ],
             capabilities: [
-                .fileAccess(.userSelectedFiles, mode: .readWrite),
-                .fileAccess(.downloadsFolder, mode: .readWrite),
-                .fileAccess(.pictureFolder, mode: .readWrite)
+                .photoLibrary(purposeString: "To detect if the file on your photo gallery is a cat/dog for the model used")
             ],
             appCategory: .games
         )

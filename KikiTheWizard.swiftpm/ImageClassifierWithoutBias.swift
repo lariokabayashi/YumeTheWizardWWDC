@@ -96,7 +96,16 @@ class ModelWithoutBias {
     /// URL of model assuming it was installed in the same bundle as this class
     class var urlOfModelInThisBundle : URL {
         let resPath = Bundle(for:self).url(forResource: "media/ModelWithoutBias", withExtension: "mlmodel")!
-        return try! MLModel.compileModel(at: resPath)
+        do{
+            let compiledModelURL = try MLModel.compileModel(at: resPath)
+            let permanentURL = try FileManager.default.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent(compiledModelURL.lastPathComponent)
+            _ = try FileManager.default.replaceItemAt(permanentURL, withItemAt: compiledModelURL)
+
+        }catch{
+            print(error)
+        }
+        let bundle = Bundle(for: self)
+        return bundle.url(forResource: "media/KikiTheWizardImageClassifier", withExtension:"mlmodelc")!
     }
     /**
         Construct ModelWithoutBias instance with an existing MLModel object.

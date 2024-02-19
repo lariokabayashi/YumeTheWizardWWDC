@@ -47,7 +47,7 @@ class TestModelScene: SKScene{
     
     let catTest4 = SKSpriteNode(imageNamed: "image 211")
     
-    private var currentNode: SKNode?
+    var currentNode: SKSpriteNode?
     
     var animalsMissed = 0
     
@@ -56,8 +56,6 @@ class TestModelScene: SKScene{
     let comment = SKSpriteNode(imageNamed: "comment")
     
     let kikiBlink = SKSpriteNode(imageNamed: "kiki-animation1")
-
-    let sparkles: SKSpriteNode = SKSpriteNode(imageNamed: "image 109")
     
     let animationIdle: [SKTexture] = [
         SKTexture(imageNamed: "cloud 1"),
@@ -70,34 +68,39 @@ class TestModelScene: SKScene{
         SKTexture(imageNamed: "cloud 8")
     ]
     
-    let animationIdleKiki: [SKTexture] = [
+    let animationIdleKiki2: [SKTexture] = [
         SKTexture(imageNamed: "kiki-animation1"),
         SKTexture(imageNamed: "kiki-animation2"),
         SKTexture(imageNamed: "kiki-animation3")
     ]
-    let animationIdleBox: [SKTexture] = [
-        SKTexture(imageNamed: "box-close"),
-        SKTexture(imageNamed: "báu")
-    ]
-
-    let animationIdleMagic: [SKTexture] = [
-        SKTexture(imageNamed: "feitiço-1"),
-        SKTexture(imageNamed: "feitiço-2"),
-        SKTexture(imageNamed: "feitiço-3"),
-        SKTexture(imageNamed: "feitiço-4"),
-        SKTexture(imageNamed: "feitiço-5")
+    
+    let bee: SKSpriteNode = SKSpriteNode(imageNamed: "image 302")
+    
+    let animationIdleBee: [SKTexture] = [
+        SKTexture(imageNamed: "image 302"),
+        SKTexture(imageNamed: "image 303"),
+        SKTexture(imageNamed: "image 304"),
+        SKTexture(imageNamed: "image 305"),
+        SKTexture(imageNamed: "image 306"),
+        SKTexture(imageNamed: "image 307"),
+        SKTexture(imageNamed: "image 308")
     ]
     
-    let animationIdleSparkles: [SKTexture] = [
-        SKTexture(imageNamed: "image 109"),
-        SKTexture(imageNamed: "image 110"),
-        SKTexture(imageNamed: "image 111"),
-        SKTexture(imageNamed: "image 112"),
-        SKTexture(imageNamed: "image 113"),
-        SKTexture(imageNamed: "image 114"),
-        SKTexture(imageNamed: "image 115"),
-        SKTexture(imageNamed: "image 116")
+    let animationIdleFlowers: [SKTexture] = [
+        SKTexture(imageNamed: "image 309"),
+        SKTexture(imageNamed: "image 310")
     ]
+    
+    let animationIdleKiki: [SKTexture] = [
+        SKTexture(imageNamed: "image 311"),
+        SKTexture(imageNamed: "image 312"),
+        SKTexture(imageNamed: "image 313"),
+        SKTexture(imageNamed: "image 314")
+    ]
+    
+    let tree: SKSpriteNode = SKSpriteNode(imageNamed: "tree")
+    let flowers: SKSpriteNode = SKSpriteNode(imageNamed: "image 309")
+    
     override func didMove(to view: SKView) {
         
         wallpaper.position = CGPoint(x: view.frame.width / 2, y: view.frame.height / 2)
@@ -169,7 +172,7 @@ class TestModelScene: SKScene{
         kikiBlink.size = CGSize(width: 281, height: 322)
         kikiBlink.position = CGPoint(x: view.frame.width/4, y: view.frame.height/2)
         addChild(kikiBlink)
-        kikiBlink.run(.repeatForever(.animate(with: animationIdleKiki, timePerFrame: 0.5)))
+        kikiBlink.run(.repeatForever(.animate(with: animationIdleKiki2, timePerFrame: 0.5)))
         kikiBlink.zPosition = -1
         
         kikiLabel.text = "Kiki"
@@ -189,18 +192,8 @@ class TestModelScene: SKScene{
         topText.numberOfLines = 3
         addChild(topText)
         
-        auxText1.fontSize = 25
-        auxText1.position = CGPoint(x: 750, y: 390)
-        auxText1.fontColor = UIColor.black
-        auxText1.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
-        auxText1.lineBreakMode = NSLineBreakMode.byWordWrapping
-        auxText1.preferredMaxLayoutWidth = 600
-        auxText1.numberOfLines = 3
-        auxText1.zPosition = -1
-        addChild(auxText1)
-        
-        auxText2.fontSize = 25
-        auxText2.position = CGPoint(x: 750, y: 260)
+        auxText2.fontSize = 30
+        auxText2.position = CGPoint(x: 750, y: 290)
         auxText2.fontColor = UIColor.black
         auxText2.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
         auxText2.lineBreakMode = NSLineBreakMode.byWordWrapping
@@ -208,11 +201,17 @@ class TestModelScene: SKScene{
         auxText2.numberOfLines = 3
         auxText2.zPosition = -1
         addChild(auxText2)
-        
-        sparkles.position = CGPoint(x: view.frame.width / 2, y: view.frame.height / 4.5)
-        sparkles.zPosition = -1
-        addChild(sparkles)
     
+        tree.position = CGPoint(x: 170, y: 500)
+        addChild(tree)
+        
+        bee.position = CGPoint(x: 270, y: 400)
+        addChild(bee)
+        bee.run(.repeatForever(.animate(with: animationIdleBee, timePerFrame: 0.3)))
+        
+        flowers.position = CGPoint(x: 870, y: 400)
+        addChild(flowers)
+        flowers.run(.repeatForever(.animate(with: animationIdleFlowers, timePerFrame: 0.3)))
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
@@ -229,9 +228,12 @@ class TestModelScene: SKScene{
                 }
                 else if page == 2{
                     board.zPosition = -1
+                    tree.zPosition = -1
+                    bee.zPosition = -1
+                    flowers.zPosition = -1
                     topText.position = CGPoint(x: 750, y: 350)
                     topText.fontSize = 25
-                    topText.text = "Interpretability allows people to understand how decisions are made, making processes more transparent and accountable."
+                    topText.text = "Interpretability in Machine Learning refers to the ability of a human to understand and explain the decisions or outcomes of an ML model"
                     topText.preferredMaxLayoutWidth = 600
                     topText.numberOfLines = 5
                     topText.zPosition = 2
@@ -247,60 +249,16 @@ class TestModelScene: SKScene{
                     page += 1
                 }
                 else if page == 4{
-                    topText.position = CGPoint(x: 750, y: 520)
+                    topText.fontSize = 30
+                    topText.position = CGPoint(x: 735, y: 420)
                     topText.text = "To reduce bias in the Dataset we will:"
                     
-                    auxText1.zPosition = 1
-                    auxText1.text = "1. Make sure the training dataset is representative of the actual distribution of classes and features"
-                    
                     auxText2.zPosition = 1
-                    auxText2.text = "2. Increase the dataset to increase sample diversity, especially for underrepresented classes or groups."
+                    auxText2.text = "Increase the dataset to increase sample diversity, especially for underrepresented classes or groups."
                     page += 1
                 }
                 else if page == 5{
-                    catTest1.removeFromParent()
-                    catTest2.removeFromParent()
-                    catTest3.removeFromParent()
-                    catTest4.removeFromParent()
-                    board.zPosition = 1
-                    comment.zPosition = -1
-                    kikiLabel.zPosition = -1
-                    kikiBlink.zPosition = -1
-                    auxText1.zPosition = -1
-                    auxText2.zPosition = -1
-                    inventoryTest.zPosition = -1
-                    contour.zPosition = -1
-                    contour2.zPosition = -1
-                    contour3.zPosition = -1
-                    contour4.zPosition = -1
-                    arrow180.zPosition = -1
-                    arrow.position = CGPoint(x: 1020, y: 700)
-                    ground.size = CGSize(width: 1000, height: 1000)
-                    ground.position = CGPoint(x: 597, y: 160)
-                    kiki.position = CGPoint(x: 597, y: 417)
-                    board.position = CGPoint(x: 597, y: 720)
-                    
-                    topText.fontSize = 30
-                    topText.position = CGPoint(x: 520, y: 690)
-                    topText.fontColor = UIColor.black
-                    topText.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
-                    topText.lineBreakMode = NSLineBreakMode.byWordWrapping
-                    topText.preferredMaxLayoutWidth = 800
-                    topText.numberOfLines = 2
-                    topText.text = "Nice! the box has been improved, now let's test it"
-                    box.position = CGPoint(x: 597, y: 217)
-                    box.size = CGSize(width: 200, height: 200)
-                    box.run(.animate(with: animationIdleBox, timePerFrame: 1))
-                    
-                    kiki.run(.animate(with: animationIdleMagic, timePerFrame: 0.5))
-                   
-                    sparkles.zPosition = 1
-                    sparkles.run(.animate(with: animationIdleSparkles, timePerFrame: 0.3))
-    
-                    page += 1
-                }
-                else if page == 6{
-                    let nextScene = buildYourAnimalScene()
+                    let nextScene = IncreaseDatasetScene()
                     nextScene.size = CGSize(width: 1194, height: 834)
                     nextScene.scaleMode = .aspectFill
                     view?.presentScene(nextScene)
@@ -315,7 +273,7 @@ class TestModelScene: SKScene{
                 let nodeName = node.name ?? "-"
                 let separated = nodeName.components(separatedBy: "-")
                 if separated[0] == "draggable" {
-                    self.currentNode = node
+                    self.currentNode = node as? SKSpriteNode
                 }
             }
         }
@@ -329,38 +287,17 @@ class TestModelScene: SKScene{
         }
     }
     
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?){
 
         if (page == 0){
             if let touch = touches.first, let node = currentNode {
                 if ((node.position.x > box.position.x - 50 && node.position.x < box.position.x + 50) && (node.position.y > box.position.y - 50 && node.position.y < box.position.y + 50) ){
-                    let nodeName = node.name ?? "draggable-"
-                    let separated = nodeName.components(separatedBy: "-")
-                    if separated[1] == "catTest1"{
-                        let prediction = modelPredict(fileImg: "cat-test")
+                        SoundWrong()
+                        let img = UIImage(cgImage: (node.texture?.cgImage())!)
+                        let prediction = modelPredict(fileImg: img)
                         topText.text = "Box says: It's a " + prediction + "!"
                         node.removeFromParent()
-                        animalsMissed += 1
-                    }
-                    else if separated[1] == "catTest2"{
-                        let prediction = modelPredict(fileImg: "cat-test2")
-                        topText.text = "Box says: It's a " + prediction + "!"
-                        node.removeFromParent()
-                        animalsMissed += 1
-                    }
-                    else if separated[1] == "dogTest1"{
-                        let prediction = modelPredict(fileImg: "dog-test")
-                        topText.text = "Box says: It's a " + prediction + "!"
-                        node.removeFromParent()
-                        animalsMissed += 1
-                    }
-                    else if separated[1] == "dogTest2"{
-                        let prediction = modelPredict(fileImg: "dog-test2")
-                        topText.text = "Box says: It's a " + prediction + "!"
-                        node.removeFromParent()
-                        animalsMissed += 1
-                    }
-                    arrow.zPosition = 1
+                        arrow.zPosition = 1
                 }
             }
         }
@@ -370,10 +307,10 @@ class TestModelScene: SKScene{
         self.currentNode = nil
     }
     
-    func modelPredict(fileImg: String)-> String{
+    func modelPredict(fileImg: UIImage) -> String{
         do{
             let model = try KikiTheWizardImageClassifier_1(contentsOf: KikiTheWizardImageClassifier_1.urlOfModelInThisBundle).model
-            let prediction = predict(model: model, image: UIImage.init(named: fileImg)!)
+            let prediction = predict(model: model, image: fileImg)
             print(prediction)
             return prediction ?? ""
           
@@ -381,5 +318,13 @@ class TestModelScene: SKScene{
             print(error.localizedDescription)
         }
         return ""
+    }
+    
+    func SoundWrong(){
+        let audioNode = SKAudioNode(fileNamed: "media/wrong")
+        audioNode.autoplayLooped = false
+        self.addChild(audioNode)
+        let playAction = SKAction.play()
+        audioNode.run(playAction)
     }
 }

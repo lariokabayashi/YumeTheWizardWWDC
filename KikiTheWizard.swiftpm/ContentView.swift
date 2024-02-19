@@ -5,7 +5,7 @@ import SpriteKit
 struct ContentView: View {
     
     var scene: SKScene {
-        let scene = GameScene()
+        let scene = buildYourAnimalScene()
         scene.size = CGSize(width: 1194, height: 834)
         scene.scaleMode = .aspectFill
         return scene
@@ -20,11 +20,10 @@ struct ContentView: View {
         }.edgesIgnoringSafeArea(.all)
         .onAppear {
             Bundle.main.url(forResource: "media/KikiTheWizardImageClassifier", withExtension:"mlmodel")
+            
             let cfURL = Bundle.main.url(forResource: "media/Pixelify", withExtension: "ttf")! as CFURL
 
             CTFontManagerRegisterFontsForURL(cfURL, CTFontManagerScope.process, nil)
-
-            let font = UIFont(name: "PixelifySans-VariableFont_wght.ttf", size:  14.0)
         }
     }
 }

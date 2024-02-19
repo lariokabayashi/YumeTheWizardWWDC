@@ -60,6 +60,33 @@ class MagicScene: SKScene {
         SKTexture(imageNamed: "image 116")
     ]
     
+    let bee: SKSpriteNode = SKSpriteNode(imageNamed: "image 302")
+    
+    let animationIdleBee: [SKTexture] = [
+        SKTexture(imageNamed: "image 302"),
+        SKTexture(imageNamed: "image 303"),
+        SKTexture(imageNamed: "image 304"),
+        SKTexture(imageNamed: "image 305"),
+        SKTexture(imageNamed: "image 306"),
+        SKTexture(imageNamed: "image 307"),
+        SKTexture(imageNamed: "image 308")
+    ]
+    
+    let animationIdleFlowers: [SKTexture] = [
+        SKTexture(imageNamed: "image 309"),
+        SKTexture(imageNamed: "image 310")
+    ]
+    
+    let animationIdleKiki: [SKTexture] = [
+        SKTexture(imageNamed: "image 311"),
+        SKTexture(imageNamed: "image 312"),
+        SKTexture(imageNamed: "image 313"),
+        SKTexture(imageNamed: "image 314")
+    ]
+    
+    let tree: SKSpriteNode = SKSpriteNode(imageNamed: "tree")
+    let flowers: SKSpriteNode = SKSpriteNode(imageNamed: "image 309")
+    
     override func didMove(to view: SKView) {
         
         wallpaper.position = CGPoint(x: view.frame.width / 2, y: view.frame.height / 2)
@@ -100,6 +127,17 @@ class MagicScene: SKScene {
         topText.position = CGPoint(x: 560, y: 680)
         topText.fontColor = UIColor.black
         addChild(topText)
+        
+        tree.position = CGPoint(x: 250, y: 500)
+        addChild(tree)
+        
+        bee.position = CGPoint(x: 350, y: 400)
+        addChild(bee)
+        bee.run(.repeatForever(.animate(with: animationIdleBee, timePerFrame: 0.3)))
+        
+        flowers.position = CGPoint(x: 950, y: 400)
+        addChild(flowers)
+        flowers.run(.repeatForever(.animate(with: animationIdleFlowers, timePerFrame: 0.3)))
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -107,6 +145,7 @@ class MagicScene: SKScene {
             let location = touch.location(in: self)
             let touchedNode = atPoint(location)
             if touchedNode.name == "arrow" {
+                SoundSparkles()
                 board.zPosition = -1
                 arrow.position = CGPoint(x: 1100, y: 400)
                 topText.zPosition = -1
@@ -116,13 +155,20 @@ class MagicScene: SKScene {
                 
                 page += 1
             }
-            if page == 2 && touchedNode.name == "arrow"{
+            if page == 1 && touchedNode.name == "arrow"{
                 let nextScene = TestModelScene()
                 nextScene.size = CGSize(width: 1194, height: 834)
                 nextScene.scaleMode = .aspectFill
                 view?.presentScene(nextScene)
             }
         }
+    }
+    func SoundSparkles(){
+        let audioNode = SKAudioNode(fileNamed: "media/sparkles")
+        audioNode.autoplayLooped = false
+        self.addChild(audioNode)
+        let playAction = SKAction.play()
+        audioNode.run(playAction)
     }
 }
     

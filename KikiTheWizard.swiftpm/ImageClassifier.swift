@@ -99,22 +99,10 @@ class KikiTheWizardImageClassifier_1 {
     
     /// URL of model assuming it was installed in the same bundle as this class
     class var urlOfModelInThisBundle : URL {
-        let resPath = Bundle(for:self).url(forResource: "media/KikiTheWizardImageClassifier", withExtension: "mlmodel")!
-        return try! MLModel.compileModel(at: resPath)
-//            let bundle = Bundle(for: self)
-//            return bundle.url(forResource: "media/KikiTheWizardImageClassifier", withExtension:"mlmodelc")!
-        
-        //bundle.url(forResource: "media/KikiTheWizardImageClassifier", withExtension:"mlmodel")!
-        //        URL(fileURLWithPath: "KikiTheWizardImageClassifier.mlmodel")
-        //        do {
-        //            let file = URL(fileURLWithPath: "KikiTheWizardImageClassifier")
-        //            return try MLModel.compileModel(at:file)
-        //        }
-        //        catch {
-        //            print(error)
-        //        }
-        //        let bundle = Bundle(for: self)
-        //        return bundle.url(forResource: "KikiTheWizardImageClassifier", withExtension:"mlmodel")!
+
+           let bundle = Bundle(for: self)
+           return bundle.url(forResource: "media/KikiTheWizardImageClassifier", withExtension:"mlmodelc")!
+
     }
     
     /**

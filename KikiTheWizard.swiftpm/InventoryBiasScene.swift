@@ -135,9 +135,9 @@ class InventoryBiasScene: SKScene {
             
             let touchedNodes = self.nodes(at: location)
             for node in touchedNodes.reversed() {
-                let nodeName = node.name ?? "draggable"
+                let nodeName = node.name ?? "-"
                 let fullNameArr = nodeName.components(separatedBy: "-")
-                var firstName: String = fullNameArr[0]
+                let firstName: String = fullNameArr[0]
                 if firstName == "draggable" {
                     self.currentNode = node
                 }
@@ -158,13 +158,15 @@ class InventoryBiasScene: SKScene {
                 
                 let nodeName = node.name ?? "draggable-"
                 let fullNameArr = nodeName.components(separatedBy: "-")
-                var lastName: String = fullNameArr[1]
+                let lastName: String = fullNameArr[1]
                 
                 if lastName == "Cat"{
+                    topText.text = "Drag the cats from the inventory into the box."
                     node.removeFromParent()
                     goneCats += 1
                 }
                 else if lastName == "Dog"{
+                    SoundWrong()
                     topText.text = "That's not a cat!"
                 }
             }
@@ -172,12 +174,14 @@ class InventoryBiasScene: SKScene {
             if ((node.position.x > boxDogs.position.x - 50 && node.position.x < boxDogs.position.x + 50) && (node.position.y > boxDogs.position.y - 50 && node.position.y < boxDogs.position.y + 50) ){
                     let nodeName = node.name ?? "draggable-"
                     let fullNameArr = nodeName.components(separatedBy: "-")
-                    var lastName: String = fullNameArr[1]
+                let lastName: String = fullNameArr[1]
                     if lastName == "Dog"{
+                        DogText.text = "Drag the dogs from the inventory into the box."
                         node.removeFromParent()
                         goneDogs += 1
                     }
                     else if lastName == "Cat"{
+                        SoundWrong()
                         DogText.text = "That's not a dog!"
                 }
             }
@@ -210,5 +214,11 @@ class InventoryBiasScene: SKScene {
             }
         }
     }
-
+    func SoundWrong(){
+        let audioNode = SKAudioNode(fileNamed: "media/wrong")
+        audioNode.autoplayLooped = false
+        self.addChild(audioNode)
+        let playAction = SKAction.play()
+        audioNode.run(playAction)
+    }
 }

@@ -26,7 +26,7 @@ func predict(model: MLModel, image: UIImage) -> String? {
             if value == "Dogs" || value == "dogs" {
                 return "Dog"
             }
-            else{
+            else if value == "Cats" || value == "cats"{
                 return "Cat"
             }
         }catch(let error){

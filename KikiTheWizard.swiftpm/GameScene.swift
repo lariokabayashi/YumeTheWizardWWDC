@@ -19,7 +19,7 @@ class GameScene: SKScene {
     
     let ground: SKSpriteNode = SKSpriteNode(imageNamed: "ground")
     
-    let kiki: SKSpriteNode = SKSpriteNode(imageNamed: "kiki")
+    let kiki: SKSpriteNode = SKSpriteNode(imageNamed: "image 311")
     
     let board: SKSpriteNode = SKSpriteNode(imageNamed: "board")
     
@@ -40,6 +40,35 @@ class GameScene: SKScene {
         SKTexture(imageNamed: "cloud 8")
     ]
     
+    let box: SKSpriteNode = SKSpriteNode(imageNamed: "box-close")
+    
+    let bee: SKSpriteNode = SKSpriteNode(imageNamed: "image 302")
+    
+    let animationIdleBee: [SKTexture] = [
+        SKTexture(imageNamed: "image 302"),
+        SKTexture(imageNamed: "image 303"),
+        SKTexture(imageNamed: "image 304"),
+        SKTexture(imageNamed: "image 305"),
+        SKTexture(imageNamed: "image 306"),
+        SKTexture(imageNamed: "image 307"),
+        SKTexture(imageNamed: "image 308")
+    ]
+    
+    let animationIdleFlowers: [SKTexture] = [
+        SKTexture(imageNamed: "image 309"),
+        SKTexture(imageNamed: "image 310")
+    ]
+    
+    let animationIdleKiki: [SKTexture] = [
+        SKTexture(imageNamed: "image 311"),
+        SKTexture(imageNamed: "image 312"),
+        SKTexture(imageNamed: "image 313"),
+        SKTexture(imageNamed: "image 314")
+    ]
+    
+    let tree: SKSpriteNode = SKSpriteNode(imageNamed: "tree")
+    let flowers: SKSpriteNode = SKSpriteNode(imageNamed: "image 309")
+    
     override func didMove(to view: SKView) {
         
         wallpaper.position = CGPoint(x: view.frame.width / 2, y: view.frame.height / 2)
@@ -55,8 +84,9 @@ class GameScene: SKScene {
         addChild(ground)
 
 
-        kiki.position = CGPoint(x: view.frame.width / 2, y: view.frame.height / 2)
+        kiki.position = CGPoint(x: 620, y: 400)
         addChild(kiki)
+        kiki.run(.repeatForever(.animate(with: animationIdleKiki, timePerFrame: 0.5)))
         
         board.position = CGPoint(x: view.frame.width / 2, y: 720)
         addChild(board)
@@ -75,6 +105,20 @@ class GameScene: SKScene {
         topText.preferredMaxLayoutWidth = 900
         topText.numberOfLines = 3
         addChild(topText)
+        
+        tree.position = CGPoint(x: 250, y: 500)
+        addChild(tree)
+        
+        bee.position = CGPoint(x: 350, y: 400)
+        addChild(bee)
+        bee.run(.repeatForever(.animate(with: animationIdleBee, timePerFrame: 0.3)))
+        
+        flowers.position = CGPoint(x: 950, y: 400)
+        addChild(flowers)
+        flowers.run(.repeatForever(.animate(with: animationIdleFlowers, timePerFrame: 0.3)))
+        
+        box.position = CGPoint(x: view.frame.width/2, y: view.frame.height / 5.2)
+        addChild(box)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

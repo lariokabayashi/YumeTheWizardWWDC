@@ -39,12 +39,12 @@ class buildYourAnimalScene: SKScene, ObservableObject, SelectedPhotoDelegate {
     var animalSelected: Int = 1
     var breedSelected: Int = 0
     var colorSelected: Int = 0
-    var spriteSel: SKSpriteNode = SKSpriteNode(imageNamed: "image 209")
+    var spriteSel: SKSpriteNode = SKSpriteNode(imageNamed: "image 212")
     var done:SKSpriteNode = SKSpriteNode(imageNamed: "done")
     
-    let dog1: SKSpriteNode = SKSpriteNode(imageNamed: "image 209")
-    let dog2: SKSpriteNode = SKSpriteNode(imageNamed: "image 206")
-    let dog3: SKSpriteNode = SKSpriteNode(imageNamed: "image 223")
+    let dog1: SKSpriteNode = SKSpriteNode(imageNamed: "ReplaceDog1")
+    let dog2: SKSpriteNode = SKSpriteNode(imageNamed: "ReplaceDog2")
+    let dog3: SKSpriteNode = SKSpriteNode(imageNamed: "ReplaceDog3")
     let cat1: SKSpriteNode = SKSpriteNode(imageNamed: "image 212")
     let cat2: SKSpriteNode = SKSpriteNode(imageNamed: "image 216")
     let cat3: SKSpriteNode = SKSpriteNode(imageNamed: "image 220")
@@ -105,9 +105,9 @@ class buildYourAnimalScene: SKScene, ObservableObject, SelectedPhotoDelegate {
         board3.size = CGSize(width: board3.size.width  * 1.1, height: board3.size.height  * 1.1)
         addChild(board3)
         
-        frameSelected.position = CGPoint(x: 400, y: 270)
-        addChild(frameSelected)
-        frameSelected.name = "dog1-"
+        frameNotSelected3.position = CGPoint(x: 400, y: 270)
+        addChild(frameNotSelected3)
+        frameNotSelected3.name = "dog1-"
         
         frameNotSelected.position = CGPoint(x: 600, y: 270)
         addChild(frameNotSelected)
@@ -117,9 +117,9 @@ class buildYourAnimalScene: SKScene, ObservableObject, SelectedPhotoDelegate {
         addChild(frameNotSelected2)
         frameNotSelected2.name = "dog3-"
         
-        frameNotSelected3.position = CGPoint(x: 400, y: 470)
-        addChild(frameNotSelected3)
-        frameNotSelected3.name = "cat1-"
+        frameSelected.position = CGPoint(x: 405, y: 470)
+        addChild(frameSelected)
+        frameSelected.name = "cat1-"
         
         frameNotSelected4.position = CGPoint(x: 600, y: 470)
         addChild(frameNotSelected4)
@@ -379,11 +379,10 @@ class buildYourAnimalScene: SKScene, ObservableObject, SelectedPhotoDelegate {
             
             else if touchedNode.name == "done-"{
                 if let view = self.view {
-//                    spriteSel.removeFromParent()
                     selectedSpriteImg = spriteSel
                     let scene = TestModelWithoutBiasScene()
-                    scene.addSelectedImg(img: UIImage(cgImage: (selectedSpriteImg?.texture?.cgImage())!))
-//                    scene.spriteSel = spriteSel
+                    selectedSpriteImg?.removeFromParent()
+                    scene.addSelectedImg(sprite: selectedSpriteImg)
                     scene.size = CGSize(width: 1194, height: 834)
                     scene.scaleMode = .aspectFill
                     view.presentScene(scene)

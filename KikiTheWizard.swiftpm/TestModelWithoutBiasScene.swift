@@ -21,8 +21,9 @@ class TestModelWithoutBiasScene: SKScene{
     let wallpaper: SKSpriteNode = SKSpriteNode(imageNamed: "background")
     
     let ground: SKSpriteNode = SKSpriteNode(imageNamed: "ground")
+    let ground2: SKSpriteNode = SKSpriteNode(imageNamed: "image 46")
     
-    let kiki: SKSpriteNode = SKSpriteNode(imageNamed: "kiki-in-front")
+    let kiki: SKSpriteNode = SKSpriteNode(imageNamed: "image 311")
     
     let board: SKSpriteNode = SKSpriteNode(imageNamed: "board")
     
@@ -94,10 +95,10 @@ class TestModelWithoutBiasScene: SKScene{
     let tree: SKSpriteNode = SKSpriteNode(imageNamed: "tree")
     let flowers: SKSpriteNode = SKSpriteNode(imageNamed: "image 309")
     let meetTheAuthor: SKSpriteNode = SKSpriteNode(imageNamed: "meetTheAuthor")
+    let button1: SKSpriteNode = SKSpriteNode(imageNamed: "button")
+    let button2: SKSpriteNode = SKSpriteNode(imageNamed: "button")
+    
     override func didMove(to view: SKView) {
-        
-        
-        
         wallpaper.position = CGPoint(x: view.frame.width / 2, y: view.frame.height / 2)
         addChild(wallpaper)
         
@@ -109,6 +110,10 @@ class TestModelWithoutBiasScene: SKScene{
         ground.size = CGSize(width: 1000, height: 1000)
         ground.position = CGPoint(x: view.frame.width / 2.4, y: 160)
         addChild(ground)
+        
+        ground2.position = CGPoint(x: view.frame.width / 2, y: 220)
+        addChild(ground2)
+        ground2.zPosition = -1
         
         kiki.position = CGPoint(x: view.frame.width / 2.4, y: view.frame.height / 2.5)
 //        kiki.size = CGSize(width: 844, height: 844)
@@ -128,6 +133,7 @@ class TestModelWithoutBiasScene: SKScene{
 //        addChild(contour)
         
         arrow180.position = CGPoint(x: 1020, y: view.frame.height/2)
+        arrow180.name = "arrow180"
         addChild(arrow180)
         
         arrow.position = CGPoint(x: 920, y: 700)
@@ -175,6 +181,28 @@ class TestModelWithoutBiasScene: SKScene{
         meetTheAuthor.position = CGPoint(x: view.frame.width/2, y: view.frame.height/2)
         addChild(meetTheAuthor)
         meetTheAuthor.zPosition = -1
+        
+        button1.position = CGPoint(x: view.frame.width/2, y: 500)
+        addChild(button1)
+        button1.zPosition = -1
+        button1.name = "button1"
+        
+        button2.position = CGPoint(x: view.frame.width/2, y: 650)
+        addChild(button2)
+        button2.zPosition = -1
+        button2.name = "button2"
+        
+        auxText1.position = CGPoint(x: view.frame.width/2, y: 490)
+        addChild(auxText1)
+        auxText1.zPosition = -1
+        auxText1.fontSize = 30
+        auxText1.fontColor = .black
+        
+        auxText2.position = CGPoint(x: view.frame.width/2, y: 640)
+        addChild(auxText2)
+        auxText2.zPosition = -1
+        auxText2.fontSize = 30
+        auxText2.fontColor = .black
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
@@ -193,15 +221,58 @@ class TestModelWithoutBiasScene: SKScene{
                     flowers.zPosition = -1
                     topText.position = CGPoint(x: 750, y: 400)
                     topText.fontSize = 30
-                    topText.text = "Great! Remember that consistently monitoring and enhancing the model's performance in production to identify and address biases is an ongoing task."
+                    topText.text = "Great! Keep in mind that the model is still susceptible to errors. Consistently monitoring and enhancing its performance in production to identify and address biases is an ongoing task"
                     topText.preferredMaxLayoutWidth = 600
                     topText.numberOfLines = 5
                     topText.zPosition = 1
                     page += 1
                 }
                 else if page == 2{
-                    meetTheAuthor.zPosition = 1
+                    topText.zPosition = -1
+                    comment.zPosition = -1
+                    kikiLabel.zPosition = -1
+                    kikiBlink.zPosition = -1
+                    button1.zPosition = 1
+                    button2.zPosition = 1
+                    inventoryTest.zPosition = -1
+                    arrow180.zPosition = -1
+                    arrow.zPosition = -1
+                    box.zPosition = -1
+                    ground.zPosition = -1
+                    ground2.zPosition = 1
+                    tree.zPosition = 1
+                    bee.zPosition = 1
+                    flowers.zPosition = 1
+                    tree.position = CGPoint(x: 200, y: 250)
+                    flowers.position = CGPoint(x: 1050, y: 180)
+                    bee.position = CGPoint(x: 350, y: 200)
+                    kiki.run(.repeatForever(.animate(with: animationIdleKiki, timePerFrame: 0.5)))
+                    kiki.zPosition = 2
+                    kiki.position = CGPoint(x: 597, y: 200)
+                    auxText1.zPosition = 2
+                    auxText2.zPosition = 2
+                    auxText2.text = "Test It With Another Animal"
+                    auxText1.text = "About The Author"
+                    page += 1
                 }
+            }
+            else if touchedNode.name == "button2"{
+                let scene = buildYourAnimalScene()
+                scene.size = CGSize(width: 1194, height: 834)
+                scene.scaleMode = .aspectFill
+                view?.presentScene(scene)
+                page += 1
+            }
+            else if touchedNode.name == "button1"{
+                meetTheAuthor.zPosition = 3
+                arrow180.zPosition = 4
+                arrow180.position = CGPoint(x: 110, y: arrow180.position.y)
+                page += 1
+            }
+            else if touchedNode.name == "arrow180"{
+                meetTheAuthor.zPosition = -1
+                arrow180.zPosition = -1
+                page += 1
             }
         }
         if let touch = touches.first {
@@ -229,7 +300,6 @@ class TestModelWithoutBiasScene: SKScene{
         if (page == 0){
             if let touch = touches.first, let node = currentNode {
                 if ((node.position.x > box.position.x - 200 && node.position.x < box.position.x + 200) && (node.position.y > box.position.y - 200 && node.position.y < box.position.y + 200) ){
-                    spriteSel?.size = CGSize(width: 360, height: 360)
                     let img = UIImage(cgImage: (spriteSel?.texture?.cgImage())!)
                     let prediction = modelPredict(fileImg: img)
                     topText.text = "Box says: It's a " + prediction + "!"
@@ -256,12 +326,9 @@ class TestModelWithoutBiasScene: SKScene{
         }
         return ""
     }
-    func addSelectedImg(img: UIImage) {
-        spriteSel = SKSpriteNode(texture: SKTexture(image: img))
+    func addSelectedImg(sprite: SKSpriteNode?) {
+        spriteSel = sprite
         spriteSel?.position = CGPoint(x: 1120, y: 417)
-//        let width = (spriteSel?.size.width ?? 1000)/10
-//        let height = (spriteSel?.size.height ?? 1000)/10
-//        spriteSel?.size = CGSize(width:width, height: height)
         spriteSel?.zPosition = 11
         spriteSel?.name = "draggable"
         addChild(spriteSel!)

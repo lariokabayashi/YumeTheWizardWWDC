@@ -18,6 +18,7 @@ class GameScene: SKScene {
     let wallpaper: SKSpriteNode = SKSpriteNode(imageNamed: "background")
     
     let ground: SKSpriteNode = SKSpriteNode(imageNamed: "ground")
+    let ground2: SKSpriteNode = SKSpriteNode(imageNamed: "image 46")
     
     let kiki: SKSpriteNode = SKSpriteNode(imageNamed: "image 311")
     
@@ -26,6 +27,7 @@ class GameScene: SKScene {
     let arrow: SKSpriteNode = SKSpriteNode(imageNamed: "arrow")
     
     let topText: SKLabelNode = SKLabelNode(fontNamed: "Pixelify Sans")
+    let buttonText: SKLabelNode = SKLabelNode(fontNamed: "Pixelify Sans")
     
     var page: Int = 0
     
@@ -68,6 +70,7 @@ class GameScene: SKScene {
     
     let tree: SKSpriteNode = SKSpriteNode(imageNamed: "tree")
     let flowers: SKSpriteNode = SKSpriteNode(imageNamed: "image 309")
+    let button1: SKSpriteNode = SKSpriteNode(imageNamed: "buttonInicial")
     
     override func didMove(to view: SKView) {
         
@@ -82,19 +85,28 @@ class GameScene: SKScene {
         ground.size = CGSize(width: 1000, height: 1000)
         ground.position = CGPoint(x: view.frame.width / 2, y: 160)
         addChild(ground)
+        ground.zPosition = -1
 
-
-        kiki.position = CGPoint(x: 620, y: 400)
+        ground2.position = CGPoint(x: view.frame.width / 2, y: 220)
+        addChild(ground2)
+        
+        kiki.position = CGPoint(x: 620, y: 200)
         addChild(kiki)
         kiki.run(.repeatForever(.animate(with: animationIdleKiki, timePerFrame: 0.5)))
         
         board.position = CGPoint(x: view.frame.width / 2, y: 720)
         addChild(board)
+        board.zPosition = -1
         
         arrow.position = CGPoint(x: 1020, y: 700)
         arrow.name = "arrow"
         addChild(arrow)
+        arrow.zPosition = -1
         
+        button1.position = CGPoint(x: view.frame.width/2, y: 550)
+        addChild(button1)
+        button1.name = "button1"
+    
         topText.text = "Hi, my name is Kiki, I'm an apprentice wizard"
         topText.fontSize = 30
         topText.position = CGPoint(x: 580, y: 720)
@@ -105,20 +117,25 @@ class GameScene: SKScene {
         topText.preferredMaxLayoutWidth = 900
         topText.numberOfLines = 3
         addChild(topText)
+        topText.zPosition = -1
         
         tree.position = CGPoint(x: 250, y: 500)
         addChild(tree)
+        tree.position = CGPoint(x: 200, y: 250)
         
         bee.position = CGPoint(x: 350, y: 400)
         addChild(bee)
         bee.run(.repeatForever(.animate(with: animationIdleBee, timePerFrame: 0.3)))
+        bee.position = CGPoint(x: 350, y: 200)
         
         flowers.position = CGPoint(x: 950, y: 400)
         addChild(flowers)
         flowers.run(.repeatForever(.animate(with: animationIdleFlowers, timePerFrame: 0.3)))
+        flowers.position = CGPoint(x: 1050, y: 180)
         
         box.position = CGPoint(x: view.frame.width/2, y: view.frame.height / 5.2)
         addChild(box)
+        box.zPosition = -1
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -127,12 +144,7 @@ class GameScene: SKScene {
               let location = touch.location(in: self)
               let touchedNode = atPoint(location)
               if touchedNode.name == "arrow" {
-                  if page == 0{
-                      topText.text = "I'm learning a spell that can guess what's inside a closed box."
-                      topText.position = CGPoint(x: 580, y: 720)
-                      page += 1
-                  }
-                  else if page == 1{
+                  if page == 1{
                       topText.text = "Currently, I'm practicing a spell with a very easy example, just to predict if there's a cat or a dog inside the box."
                       topText.position = CGPoint(x: 580, y: 720)
                       page += 1
@@ -154,6 +166,22 @@ class GameScene: SKScene {
                       view?.presentScene(nextScene)
                   }
               }
+             else if touchedNode.name == "button1"{
+                 kiki.position = CGPoint(x: 620, y: 400)
+                 bee.position = CGPoint(x: 350, y: 400)
+                 flowers.position = CGPoint(x: 950, y: 400)
+                 tree.position = CGPoint(x: 250, y: 500)
+                 ground.zPosition = 0
+                 box.zPosition = 0
+                 board.zPosition = 0
+                 arrow.zPosition = 0
+                 topText.text = "I'm learning a spell that can guess what's inside a closed box."
+                 topText.position = CGPoint(x: 580, y: 720)
+                 ground2.zPosition = -1
+                 button1.zPosition = -1
+                 topText.zPosition = 0
+                 page += 1
+             }
          }
     }
 }

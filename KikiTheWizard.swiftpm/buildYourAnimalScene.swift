@@ -383,8 +383,8 @@ class buildYourAnimalScene: SKScene, ObservableObject, SelectedPhotoDelegate {
                     let scene = TestModelWithoutBiasScene()
                     selectedSpriteImg?.removeFromParent()
                     scene.addSelectedImg(sprite: selectedSpriteImg)
-                    scene.size = CGSize(width: 1194, height: 834)
-                    scene.scaleMode = .aspectFill
+                    scene.size = CGSize(width: scene.size.width, height: scene.size.height)
+                    scene.scaleMode = .resizeFill
                     view.presentScene(scene)
                 
                 }

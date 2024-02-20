@@ -157,8 +157,8 @@ class MagicScene: SKScene {
             }
             if page == 1 && touchedNode.name == "arrow"{
                 let nextScene = TestModelScene()
-                nextScene.size = CGSize(width: 1194, height: 834)
-                nextScene.scaleMode = .aspectFill
+                nextScene.size = CGSize(width: nextScene.size.width, height: nextScene.size.height)
+                nextScene.scaleMode = .resizeFill
                 view?.presentScene(nextScene)
             }
         }

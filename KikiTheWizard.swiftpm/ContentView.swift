@@ -5,9 +5,10 @@ import SpriteKit
 struct ContentView: View {
     
     var scene: SKScene {
-        let scene = buildYourAnimalScene()
-        scene.size = CGSize(width: 1194, height: 834)
-        scene.scaleMode = .aspectFill
+        let scene = GameScene()
+//        scene.size = CGSize(width: 1194, height: 834)
+        scene.size = CGSize(width: scene.size.width, height: scene.size.height)
+        scene.scaleMode = .resizeFill
         return scene
     }
     

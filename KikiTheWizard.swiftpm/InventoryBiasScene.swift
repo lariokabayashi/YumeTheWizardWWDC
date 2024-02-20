@@ -154,7 +154,7 @@ class InventoryBiasScene: SKScene {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first, let node = currentNode {
-            if ((node.position.x > boxCats.position.x - 50 && node.position.x < boxCats.position.x + 50) && (node.position.y > boxCats.position.y - 50 && node.position.y < boxCats.position.y + 50) ){
+            if ((node.position.x > boxCats.position.x - 100 && node.position.x < boxCats.position.x + 100) && (node.position.y > boxCats.position.y - 100 && node.position.y < boxCats.position.y + 100) ){
                 
                 let nodeName = node.name ?? "draggable-"
                 let fullNameArr = nodeName.components(separatedBy: "-")
@@ -171,7 +171,7 @@ class InventoryBiasScene: SKScene {
                 }
             }
             
-            if ((node.position.x > boxDogs.position.x - 50 && node.position.x < boxDogs.position.x + 50) && (node.position.y > boxDogs.position.y - 50 && node.position.y < boxDogs.position.y + 50) ){
+            if ((node.position.x > boxDogs.position.x - 100 && node.position.x < boxDogs.position.x + 100) && (node.position.y > boxDogs.position.y - 100 && node.position.y < boxDogs.position.y + 100) ){
                     let nodeName = node.name ?? "draggable-"
                     let fullNameArr = nodeName.components(separatedBy: "-")
                 let lastName: String = fullNameArr[1]
@@ -186,10 +186,10 @@ class InventoryBiasScene: SKScene {
                 }
             }
         }
-        if goneCats == 10 && goneDogs == 10{
+        if goneCats >= 10 && goneDogs >= 10{
             let nextScene = MagicScene()
-            nextScene.size = CGSize(width: 1194, height: 834)
-            nextScene.scaleMode = .aspectFill
+            nextScene.size = CGSize(width: nextScene.size.width, height: nextScene.size.height)
+            nextScene.scaleMode = .resizeFill
             view?.presentScene(nextScene)
         }
     }

@@ -163,15 +163,15 @@ class IncreaseDatasetScene: SKScene {
                      }
                     else{
                         let nextScene = ImprovedModelScene()
-                        nextScene.size = CGSize(width: 1194, height: 834)
-                        nextScene.scaleMode = .aspectFill
+                        nextScene.size = CGSize(width: nextScene.size.width, height: nextScene.size.height)
+                        nextScene.scaleMode = .resizeFill
                         view?.presentScene(nextScene)
                     }
                 }
                  
                 else if touchedNode.name == "arrow" {
                       if page == 0{
-                          topText.text = "To collect the images of cats and dogs, press anywhere in the screen of the computer"
+                          topText.text = "To download cat and dog images, click anywhere on the computer screen until the download finishes."
                           tv.removeFromParent()
                           screen.zPosition = 0
                           tv2.zPosition = 0

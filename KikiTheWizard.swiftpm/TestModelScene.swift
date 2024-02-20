@@ -176,15 +176,15 @@ class TestModelScene: SKScene{
         kikiBlink.zPosition = -1
         
         kikiLabel.text = "Kiki"
-        kikiLabel.position = CGPoint(x: 320, y: 620)
+        kikiLabel.position = CGPoint(x: 320, y: 610)
         kikiLabel.fontSize = 40
         kikiLabel.fontColor = UIColor.black
         kikiLabel.zPosition = -1
         addChild(kikiLabel)
         
-        topText.text = "Let's see if it works, put a cat or a dog inside the box"
+        topText.text = "Test it out by placing a cat in the box and observe the box's classification"
         topText.fontSize = 30
-        topText.position = CGPoint(x: 480, y: 690)
+        topText.position = CGPoint(x: 475, y: 685)
         topText.fontColor = UIColor.black
         topText.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
         topText.lineBreakMode = NSLineBreakMode.byWordWrapping
@@ -193,7 +193,7 @@ class TestModelScene: SKScene{
         addChild(topText)
         
         auxText2.fontSize = 30
-        auxText2.position = CGPoint(x: 750, y: 290)
+        auxText2.position = CGPoint(x: 750, y: 320)
         auxText2.fontColor = UIColor.black
         auxText2.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
         auxText2.lineBreakMode = NSLineBreakMode.byWordWrapping
@@ -219,10 +219,12 @@ class TestModelScene: SKScene{
             let touchedNode = atPoint(location)
             if touchedNode.name == "arrow" {
                 if page == 0{
-                    topText.text = "Saw? The spell isn't working"
+                    topText.position = CGPoint(x: 475, y: 680)
+                    topText.text = "Did you notice? The box classified the cat as a dog, so it's not working correctly."
                     page += 1
                 }
                 else if page == 1{
+                    topText.position = CGPoint(x: 475, y: 695)
                     topText.text = "I think it's because I didn't apply interpretability."
                     page += 1
                 }
@@ -250,7 +252,7 @@ class TestModelScene: SKScene{
                 }
                 else if page == 4{
                     topText.fontSize = 30
-                    topText.position = CGPoint(x: 735, y: 420)
+                    topText.position = CGPoint(x: 735, y: 440)
                     topText.text = "To reduce bias in the Dataset we will:"
                     
                     auxText2.zPosition = 1
@@ -259,8 +261,8 @@ class TestModelScene: SKScene{
                 }
                 else if page == 5{
                     let nextScene = IncreaseDatasetScene()
-                    nextScene.size = CGSize(width: 1194, height: 834)
-                    nextScene.scaleMode = .aspectFill
+                    nextScene.size = CGSize(width: nextScene.size.width, height: nextScene.size.height)
+                    nextScene.scaleMode = .resizeFill
                     view?.presentScene(nextScene)
                 }
             }
@@ -295,7 +297,8 @@ class TestModelScene: SKScene{
                         SoundWrong()
                         let img = UIImage(cgImage: (node.texture?.cgImage())!)
                         let prediction = modelPredict(fileImg: img)
-                        topText.text = "Box says: It's a " + prediction + "!"
+                    topText.position = CGPoint(x: 475, y: 695)
+                    topText.text = "Box says: It's a " + prediction + "!"
                         node.removeFromParent()
                         arrow.zPosition = 1
                 }

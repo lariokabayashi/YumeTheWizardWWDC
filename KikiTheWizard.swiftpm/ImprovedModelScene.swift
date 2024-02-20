@@ -104,17 +104,17 @@ class ImprovedModelScene: SKScene{
         ground.position = CGPoint(x: 597, y: 160)
         addChild(ground)
         
-        kiki.position = CGPoint(x: 620, y: 400)
+        kiki.position = CGPoint(x: 620, y: 370)
         addChild(kiki)
         
         box.position = CGPoint(x: view.frame.width / 2.4, y: view.frame.height / 5.2)
         addChild(box)
         
         
-        board.position = CGPoint(x: 597, y: 720)
+        board.position = CGPoint(x: 597, y: 750)
         addChild(board)
         
-        arrow.position = CGPoint(x: 1020, y: 700)
+        arrow.position = CGPoint(x: 1020, y: 730)
         addChild(arrow)
         arrow.name = "arrow"
         arrow.zPosition = 11
@@ -124,7 +124,7 @@ class ImprovedModelScene: SKScene{
         addChild(sparkles)
         
         topText.fontSize = 30
-        topText.position = CGPoint(x: 520, y: 710)
+        topText.position = CGPoint(x: 520, y: 745)
         topText.fontColor = UIColor.black
         topText.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
         topText.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
@@ -167,8 +167,8 @@ class ImprovedModelScene: SKScene{
                 }
                 else if page == 1{
                     let nextScene = buildYourAnimalScene()
-                    nextScene.size = CGSize(width: 1194, height: 834)
-                    nextScene.scaleMode = .aspectFill
+                    nextScene.size = CGSize(width: nextScene.size.width, height: nextScene.size.height)
+                    nextScene.scaleMode = .resizeFill
                     view?.presentScene(nextScene)
                 }
             }

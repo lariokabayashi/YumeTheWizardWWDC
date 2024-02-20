@@ -139,6 +139,7 @@ class TestModelWithoutBiasScene: SKScene{
         arrow.position = CGPoint(x: 920, y: 700)
         arrow.name = "arrow"
         addChild(arrow)
+        arrow.zPosition = -1
         
         comment.position = CGPoint(x: view.frame.width/2, y: view.frame.height/2)
         addChild(comment)
@@ -151,7 +152,7 @@ class TestModelWithoutBiasScene: SKScene{
         kikiBlink.zPosition = -1
         
         kikiLabel.text = "Kiki"
-        kikiLabel.position = CGPoint(x: 320, y: 620)
+        kikiLabel.position = CGPoint(x: 320, y: 610)
         kikiLabel.fontSize = 40
         kikiLabel.fontColor = UIColor.black
         kikiLabel.zPosition = -1
@@ -159,7 +160,7 @@ class TestModelWithoutBiasScene: SKScene{
         
         topText.text = "Let's see if it works, put a cat or a dog inside the box."
         topText.fontSize = 30
-        topText.position = CGPoint(x: 480, y: 700)
+        topText.position = CGPoint(x: 480, y: 710)
         topText.fontColor = UIColor.black
         topText.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
         topText.lineBreakMode = NSLineBreakMode.byWordWrapping
@@ -258,8 +259,8 @@ class TestModelWithoutBiasScene: SKScene{
             }
             else if touchedNode.name == "button2"{
                 let scene = buildYourAnimalScene()
-                scene.size = CGSize(width: 1194, height: 834)
-                scene.scaleMode = .aspectFill
+                scene.size = CGSize(width: scene.size.width, height: scene.size.height)
+                scene.scaleMode = .resizeFill
                 view?.presentScene(scene)
                 page += 1
             }
@@ -301,6 +302,7 @@ class TestModelWithoutBiasScene: SKScene{
             if let touch = touches.first, let node = currentNode {
                 if ((node.position.x > box.position.x - 200 && node.position.x < box.position.x + 200) && (node.position.y > box.position.y - 200 && node.position.y < box.position.y + 200) ){
                     let img = UIImage(cgImage: (spriteSel?.texture?.cgImage())!)
+                    arrow.zPosition = 0
                     let prediction = modelPredict(fileImg: img)
                     topText.text = "Box says: It's a " + prediction + "!"
                     node.removeFromParent()

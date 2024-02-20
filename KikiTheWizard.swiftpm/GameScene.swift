@@ -97,6 +97,7 @@ class GameScene: SKScene {
         board.position = CGPoint(x: view.frame.width / 2, y: 720)
         addChild(board)
         board.zPosition = -1
+        board.name = "board"
         
         arrow.position = CGPoint(x: 1020, y: 700)
         arrow.name = "arrow"
@@ -114,7 +115,7 @@ class GameScene: SKScene {
         topText.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
         topText.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
         topText.lineBreakMode = NSLineBreakMode.byWordWrapping
-        topText.preferredMaxLayoutWidth = 900
+        topText.preferredMaxLayoutWidth = 800
         topText.numberOfLines = 3
         addChild(topText)
         topText.zPosition = -1
@@ -143,26 +144,31 @@ class GameScene: SKScene {
          for touch in touches {
               let location = touch.location(in: self)
               let touchedNode = atPoint(location)
-              if touchedNode.name == "arrow" {
+              if touchedNode.name == "arrow" || touchedNode.name == "board"{
                   if page == 1{
+                      topText.text = "I'm learning a spell that can guess what's inside a closed box."
+                      page += 1
+                  }
+                  else if page == 2{
                       topText.text = "Currently, I'm practicing a spell with a very easy example, just to predict if there's a cat or a dog inside the box."
                       topText.position = CGPoint(x: 580, y: 720)
                       page += 1
                   }
-                  else if page == 2{
+                  else if page == 3{
                       topText.text = "However, I'm having difficulty executing it because it often fails.I'll show you."
                       topText.position = CGPoint(x: 580, y: 720)
                       page += 1
                   }
-                  else if page == 3{
+                  else if page == 4{
                       topText.text = "First, let's collect data on cats and dogs."
                       topText.position = CGPoint(x: 580, y: 720)
                       page += 1
                   }
-                  else if page == 4{
+                  else if page == 5{
                       let nextScene = InventoryBiasScene()
-                      nextScene.size = CGSize(width: 1194, height: 834)
-                      nextScene.scaleMode = .aspectFill
+//                      nextScene.size = CGSize(width: 1194, height: 834)
+                      nextScene.size = CGSize(width: nextScene.size.width, height: nextScene.size.height)
+                      nextScene.scaleMode = .resizeFill
                       view?.presentScene(nextScene)
                   }
               }
@@ -175,7 +181,7 @@ class GameScene: SKScene {
                  box.zPosition = 0
                  board.zPosition = 0
                  arrow.zPosition = 0
-                 topText.text = "I'm learning a spell that can guess what's inside a closed box."
+                 topText.text = "Hi, my name is Kiki, I'm an apprentice wizard"
                  topText.position = CGPoint(x: 580, y: 720)
                  ground2.zPosition = -1
                  button1.zPosition = -1

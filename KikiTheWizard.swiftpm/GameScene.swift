@@ -8,7 +8,6 @@
 import Foundation
 import SpriteKit
 import SwiftUI
-import Metal
 
 @available(iOS 17.0, *)
 class GameScene: SKScene {
@@ -72,12 +71,19 @@ class GameScene: SKScene {
     let flowers: SKSpriteNode = SKSpriteNode(imageNamed: "image 309")
     let button1: SKSpriteNode = SKSpriteNode(imageNamed: "buttonInicial")
     
+    var width: Double = 0
+    var height: Double = 0
+    
     override func didMove(to view: SKView) {
+        width = view.frame.width
+        height = view.frame.height
         
         wallpaper.position = CGPoint(x: view.frame.width / 2, y: view.frame.height / 2)
+        wallpaper.size = CGSize(width: 20000, height: 20000)
         addChild(wallpaper)
         
         background.position = CGPoint(x: view.frame.width / 2, y: view.frame.height / 2)
+        background.size = CGSize(width: 1366, height: 1024)
         addChild(background)
         
         background.run(.repeatForever(.animate(with: animationIdle, timePerFrame: 0.5)))
@@ -94,12 +100,12 @@ class GameScene: SKScene {
         addChild(kiki)
         kiki.run(.repeatForever(.animate(with: animationIdleKiki, timePerFrame: 0.5)))
         
-        board.position = CGPoint(x: view.frame.width / 2, y: 720)
+        board.position = CGPoint(x: view.frame.width / 2, y: view.frame.height/1.15)
         addChild(board)
         board.zPosition = -1
         board.name = "board"
         
-        arrow.position = CGPoint(x: 1020, y: 700)
+        arrow.position = CGPoint(x: view.frame.width/1.17, y: view.frame.height/1.1424)
         arrow.name = "arrow"
         addChild(arrow)
         arrow.zPosition = -1
@@ -110,7 +116,7 @@ class GameScene: SKScene {
     
         topText.text = "Hi, my name is Kiki, I'm an apprentice wizard"
         topText.fontSize = 30
-        topText.position = CGPoint(x: 580, y: 720)
+        topText.position = CGPoint(x: view.frame.width/2, y: view.frame.height/1.17)
         topText.fontColor = UIColor.black
         topText.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
         topText.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
@@ -145,49 +151,67 @@ class GameScene: SKScene {
               let location = touch.location(in: self)
               let touchedNode = atPoint(location)
               if touchedNode.name == "arrow" || touchedNode.name == "board"{
+                  SoundEnter()
                   if page == 1{
                       topText.text = "I'm learning a spell that can guess what's inside a closed box."
                       page += 1
                   }
                   else if page == 2{
                       topText.text = "Currently, I'm practicing a spell with a very easy example, just to predict if there's a cat or a dog inside the box."
-                      topText.position = CGPoint(x: 580, y: 720)
+                      topText.position = CGPoint(x: width/2.058, y: height/1.1583)
                       page += 1
                   }
                   else if page == 3{
                       topText.text = "However, I'm having difficulty executing it because it often fails.I'll show you."
-                      topText.position = CGPoint(x: 580, y: 720)
                       page += 1
                   }
                   else if page == 4{
                       topText.text = "First, let's collect data on cats and dogs."
-                      topText.position = CGPoint(x: 580, y: 720)
                       page += 1
                   }
                   else if page == 5{
+                      
                       let nextScene = InventoryBiasScene()
-//                      nextScene.size = CGSize(width: 1194, height: 834)
+//                      nextScene.size = CGSize(width: 1366, height: 1024)
+//                      nextScene.anchorPoint = CGPoint(x: 0, y: 0)
                       nextScene.size = CGSize(width: nextScene.size.width, height: nextScene.size.height)
+//                      nextScene.setScale(0.1)
+//                      nextScene.size = CGSize(width: 1024, height: 768)
                       nextScene.scaleMode = .resizeFill
                       view?.presentScene(nextScene)
                   }
               }
              else if touchedNode.name == "button1"{
+                 SoundClick()
                  kiki.position = CGPoint(x: 620, y: 400)
                  bee.position = CGPoint(x: 350, y: 400)
                  flowers.position = CGPoint(x: 950, y: 400)
                  tree.position = CGPoint(x: 250, y: 500)
                  ground.zPosition = 0
                  box.zPosition = 0
-                 board.zPosition = 0
-                 arrow.zPosition = 0
+                 board.zPosition = 1
+                 arrow.zPosition = 2
                  topText.text = "Hi, my name is Kiki, I'm an apprentice wizard"
-                 topText.position = CGPoint(x: 580, y: 720)
+                 topText.position = CGPoint(x: width/2, y: height/1.17)
                  ground2.zPosition = -1
                  button1.zPosition = -1
-                 topText.zPosition = 0
+                 topText.zPosition = 1
                  page += 1
              }
          }
+    }
+    func SoundClick(){
+        let audioNode = SKAudioNode(fileNamed: "media/click")
+        audioNode.autoplayLooped = false
+        self.addChild(audioNode)
+        let playAction = SKAction.play()
+        audioNode.run(playAction)
+    }
+    func SoundEnter(){
+        let audioNode = SKAudioNode(fileNamed: "media/enter")
+        audioNode.autoplayLooped = false
+        self.addChild(audioNode)
+        let playAction = SKAction.play()
+        audioNode.run(playAction)
     }
 }

@@ -90,6 +90,7 @@ class MagicScene: SKScene {
     override func didMove(to view: SKView) {
         
         wallpaper.position = CGPoint(x: view.frame.width / 2, y: view.frame.height / 2)
+        wallpaper.size = CGSize(width: 20000, height: 20000)
         addChild(wallpaper)
         
         background.position = CGPoint(x: view.frame.width / 2, y: view.frame.height / 2)
@@ -113,20 +114,23 @@ class MagicScene: SKScene {
         addChild(box)
         
         
-        board.position = CGPoint(x: view.frame.width / 2, y: 720)
+        board.position = CGPoint(x: view.frame.width / 2, y: view.frame.height/1.15)
         addChild(board)
+        board.zPosition = 2
         
-        arrow.position = CGPoint(x: 1020, y: 700)
+        arrow.position = CGPoint(x: view.frame.width/1.17, y: view.frame.height/1.1424)
         arrow.name = "arrow"
         addChild(arrow)
+        arrow.zPosition = 3
         
         topText.text = "Very well, now we have everything prepared to perform the spell."
         topText.fontSize = 30
-        topText.preferredMaxLayoutWidth = 900
+        topText.preferredMaxLayoutWidth = 800
         topText.numberOfLines = 2
-        topText.position = CGPoint(x: 560, y: 680)
+        topText.position = CGPoint(x: view.frame.width/2, y: view.frame.height/1.22)
         topText.fontColor = UIColor.black
         addChild(topText)
+        topText.zPosition = 2
         
         tree.position = CGPoint(x: 250, y: 500)
         addChild(tree)
@@ -145,17 +149,19 @@ class MagicScene: SKScene {
             let location = touch.location(in: self)
             let touchedNode = atPoint(location)
             if touchedNode.name == "arrow" {
+                SoundEnter()
                 SoundSparkles()
                 board.zPosition = -1
                 arrow.position = CGPoint(x: 1100, y: 400)
                 topText.zPosition = -1
                 kiki.run(.repeatForever(.animate(with: animationIdleMagic, timePerFrame: 0.5)))
-                
+                box.zPosition = 5
                 sparkles.run(.repeatForever(.animate(with: animationIdleSparkles, timePerFrame: 0.1)))
                 
                 page += 1
             }
             if page == 1 && touchedNode.name == "arrow"{
+                SoundEnter()
                 let nextScene = TestModelScene()
                 nextScene.size = CGSize(width: nextScene.size.width, height: nextScene.size.height)
                 nextScene.scaleMode = .resizeFill
@@ -165,6 +171,13 @@ class MagicScene: SKScene {
     }
     func SoundSparkles(){
         let audioNode = SKAudioNode(fileNamed: "media/sparkles")
+        audioNode.autoplayLooped = false
+        self.addChild(audioNode)
+        let playAction = SKAction.play()
+        audioNode.run(playAction)
+    }
+    func SoundEnter(){
+        let audioNode = SKAudioNode(fileNamed: "media/enter")
         audioNode.autoplayLooped = false
         self.addChild(audioNode)
         let playAction = SKAction.play()

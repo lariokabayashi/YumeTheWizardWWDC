@@ -70,14 +70,19 @@ class buildYourAnimalScene: SKScene, ObservableObject, SelectedPhotoDelegate {
         SKTexture(imageNamed: "cloud 7"),
         SKTexture(imageNamed: "cloud 8")
     ]
+    var width: Double = 0
+    var height: Double = 0
     
     var selectedSpriteImg: SKSpriteNode?
 
 //    weak var SelectedSprite: SelectedPhotoDelegate?
     
     override func didMove(to view: SKView) {
+        width = view.frame.size.width
+        height = view.frame.size.height
         
         wallpaper.position = CGPoint(x: view.frame.width / 2, y: view.frame.height / 2)
+        wallpaper.size = CGSize(width: 2000, height: 2000)
         addChild(wallpaper)
         
         background.position = CGPoint(x: view.frame.width / 2, y: view.frame.height / 2)
@@ -87,7 +92,7 @@ class buildYourAnimalScene: SKScene, ObservableObject, SelectedPhotoDelegate {
         frameBuild.position = CGPoint(x: view.frame.width / 2, y: view.frame.height / 2)
         addChild(frameBuild)
         
-        squareSelected.position = CGPoint(x: 400, y: 270)
+        squareSelected.position = CGPoint(x: width/2.99, y: height/3.07)
         squareSelected.zPosition = -1
         addChild(squareSelected)
         
@@ -105,76 +110,76 @@ class buildYourAnimalScene: SKScene, ObservableObject, SelectedPhotoDelegate {
         board3.size = CGSize(width: board3.size.width  * 1.1, height: board3.size.height  * 1.1)
         addChild(board3)
         
-        frameNotSelected3.position = CGPoint(x: 400, y: 270)
+        frameNotSelected3.position = CGPoint(x: width/2.99, y: height/3.07)
         addChild(frameNotSelected3)
         frameNotSelected3.name = "dog1-"
         
-        frameNotSelected.position = CGPoint(x: 600, y: 270)
+        frameNotSelected.position = CGPoint(x: width/1.95, y: height/3.07)
         addChild(frameNotSelected)
         frameNotSelected.name = "dog2-"
         
-        frameNotSelected2.position = CGPoint(x: 800, y: 270)
+        frameNotSelected2.position = CGPoint(x: width/1.49, y: height/3.07)
         addChild(frameNotSelected2)
         frameNotSelected2.name = "dog3-"
         
-        frameSelected.position = CGPoint(x: 405, y: 470)
+        frameSelected.position = CGPoint(x: width/2.94, y: height/1.77)
         addChild(frameSelected)
         frameSelected.name = "cat1-"
         
-        frameNotSelected4.position = CGPoint(x: 600, y: 470)
+        frameNotSelected4.position = CGPoint(x: width/1.95, y: height/1.77)
         addChild(frameNotSelected4)
         frameNotSelected4.name = "cat2-"
         
-        frameNotSelected5.position = CGPoint(x: 800, y: 470)
+        frameNotSelected5.position = CGPoint(x: width/1.49, y: height/1.77)
         addChild(frameNotSelected5)
         frameNotSelected5.name = "cat3-"
         
-        dog1.position = CGPoint(x: 407, y: 270)
+        dog1.position = CGPoint(x: width/2.93, y: height/3.07)
         addChild(dog1)
         dog1.name = "dog1-choosable"
-        dog2.position = CGPoint(x: 600, y: 270)
+        dog2.position = CGPoint(x: width/1.95, y: height/3.07)
         addChild(dog2)
         dog2.name = "dog2-choosable"
-        dog3.position = CGPoint(x: 800, y: 270)
+        dog3.position = CGPoint(x: width/1.49, y: height/3.07)
         addChild(dog3)
         dog3.name = "dog3-choosable"
         
-        cat1.position = CGPoint(x: 400, y: 470)
+        cat1.position = CGPoint(x: width/2.99, y: height/1.77)
         cat1.name = "cat1-choosable"
         addChild(cat1)
-        cat2.position = CGPoint(x: 600, y: 470)
+        cat2.position = CGPoint(x: width/1.95, y: height/1.77)
         cat2.name = "cat2-choosable"
         addChild(cat2)
-        cat3.position = CGPoint(x: 800, y: 470)
+        cat3.position = CGPoint(x: width/1.49, y: height/1.77)
         cat3.name = "cat3-choosable"
         addChild(cat3)
         
-        Realdog1.position = CGPoint(x: 407, y: 270)
+        Realdog1.position = CGPoint(x: width/2.93, y: height/3.07)
         Realdog1.zPosition = -1
         addChild(Realdog1)
         Realdog1.name = "dog1-choosable"
         
-        Realdog2.position = CGPoint(x: 600, y: 270)
+        Realdog2.position = CGPoint(x: width/1.95, y: height/3.07)
         Realdog2.zPosition = -1
         addChild(Realdog2)
         Realdog2.name = "dog2-choosable"
         
-        Realdog3.position = CGPoint(x: 800, y: 270)
+        Realdog3.position = CGPoint(x: width/1.49, y: height/3.07)
         Realdog3.zPosition = -1
         addChild(Realdog3)
         Realdog3.name = "dog3-choosable"
         
-        Realcat1.position = CGPoint(x: 400, y: 470)
+        Realcat1.position = CGPoint(x: width/2.99, y: height/1.77)
         Realcat1.zPosition = -1
         Realcat1.name = "cat1-choosable"
         addChild(Realcat1)
         
-        Realcat2.position = CGPoint(x: 600, y: 470)
+        Realcat2.position = CGPoint(x: width/1.95, y: height/1.77)
         Realcat2.zPosition = -1
         Realcat2.name = "cat2-choosable"
         addChild(Realcat2)
         
-        Realcat3.position = CGPoint(x: 800, y: 470)
+        Realcat3.position = CGPoint(x: width/1.49, y: height/1.77)
         Realcat3.zPosition = -1
         Realcat3.name = "cat3-choosable"
         addChild(Realcat3)
@@ -219,7 +224,7 @@ class buildYourAnimalScene: SKScene, ObservableObject, SelectedPhotoDelegate {
         UploadText.fontSize = 25
         addChild(UploadText)
         
-        photoGallery.position = CGPoint(x: 600, y: 400)
+        photoGallery.position = CGPoint(x: width/1.99, y: height/2.085)
         photoGallery.zPosition = -1
         photoGallery.name = "photoGallery-"
         addChild(photoGallery)
@@ -337,6 +342,7 @@ class buildYourAnimalScene: SKScene, ObservableObject, SelectedPhotoDelegate {
             }
             
             else if lastName == "choosable"{
+                SoundClick()
                 spriteSel = touchedNode as! SKSpriteNode
                 selectedSpriteImg = spriteSel
                 if page == 0{
@@ -353,14 +359,26 @@ class buildYourAnimalScene: SKScene, ObservableObject, SelectedPhotoDelegate {
             }
             else if touchedNode.name == "photoGallery-"{
                 // Get the current authorization state.
-                let status = PHPhotoLibrary.authorizationStatus()
+                var status = PHPhotoLibrary.authorizationStatus()
                 if (status == PHAuthorizationStatus.notDetermined) {
-                    PHPhotoLibrary.requestAuthorization(for: .readWrite) {
-                        [weak self] (status:PHAuthorizationStatus) in
-                        print("called");
+                    PHPhotoLibrary.requestAuthorization(for: .readWrite) {aStatus in
+                        status = aStatus
+                        if (status == PHAuthorizationStatus.authorized) {
+                            // Present the SwiftUI view
+                            if let viewController = self.view?.window?.rootViewController {
+                                let swiftUIView = ImagePickerView(destinationScene: self, sourceType: .photoLibrary)
+                                let hostingController = UIHostingController(rootView: swiftUIView)
+                                // Customize the presentation if needed
+                                hostingController.modalPresentationStyle = .fullScreen
+                                viewController.present(hostingController, animated: true, completion: nil)
+                            }
+                        }
+
+                        else if (status == PHAuthorizationStatus.denied) {
+                            // Access has been denied.
+                        }
                     }
                 }
-                
                 else if (status == PHAuthorizationStatus.authorized) {
                     // Present the SwiftUI view
                     if let viewController = self.view?.window?.rootViewController {
@@ -381,16 +399,16 @@ class buildYourAnimalScene: SKScene, ObservableObject, SelectedPhotoDelegate {
                 if let view = self.view {
                     selectedSpriteImg = spriteSel
                     let scene = TestModelWithoutBiasScene()
-                    selectedSpriteImg?.removeFromParent()
                     scene.addSelectedImg(sprite: selectedSpriteImg)
                     scene.size = CGSize(width: scene.size.width, height: scene.size.height)
                     scene.scaleMode = .resizeFill
                     view.presentScene(scene)
-                
+//                    selectedSpriteImg?.removeFromParent()
                 }
             }
         }
     }
+    
     func findFrame(name: String)-> SKSpriteNode{
         let arrayFrames = [frameSelected, frameNotSelected, frameNotSelected2, frameNotSelected3, frameNotSelected4, frameNotSelected5]
         for frame in arrayFrames{
@@ -401,6 +419,14 @@ class buildYourAnimalScene: SKScene, ObservableObject, SelectedPhotoDelegate {
             }
         }
         return SKSpriteNode()
+    }
+    
+    func SoundClick(){
+        let audioNode = SKAudioNode(fileNamed: "media/click")
+        audioNode.autoplayLooped = false
+        self.addChild(audioNode)
+        let playAction = SKAction.play()
+        audioNode.run(playAction)
     }
 }
 

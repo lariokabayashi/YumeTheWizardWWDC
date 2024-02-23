@@ -11,7 +11,7 @@ import CoreML
 
 @available(iOS 17.0, *)
 class InventoryBiasScene: SKScene {
-    
+    let wallpaper: SKSpriteNode = SKSpriteNode(imageNamed: "backGray")
     let inventory: SKSpriteNode = SKSpriteNode(imageNamed: "inventoryy")
     let topText: SKLabelNode = SKLabelNode(fontNamed: "Pixelify Sans")
     let DogText: SKLabelNode = SKLabelNode(fontNamed: "Pixelify Sans")
@@ -48,6 +48,9 @@ class InventoryBiasScene: SKScene {
     var goneCats: Int = 0
     var goneDogs: Int = 0
     private var currentNode: SKNode?
+    var width: Double = 0
+    var height: Double = 0
+    var InitialLocation: CGPoint = CGPoint(x: 0, y: 0)
     
     let animationIdleDog: [SKTexture] = [
         SKTexture(imageNamed: "image 247"),
@@ -63,6 +66,12 @@ class InventoryBiasScene: SKScene {
     ]
     
     override func didMove(to view: SKView) {
+        width = view.frame.size.width
+        height = view.frame.size.height
+        
+        wallpaper.position = CGPoint(x: view.frame.width / 2, y: view.frame.height / 2)
+        wallpaper.size = CGSize(width: 20000, height: 20000)
+        addChild(wallpaper)
         
         inventory.position = CGPoint(x: view.frame.width / 2, y: view.frame.height / 2)
         addChild(inventory)
@@ -127,7 +136,11 @@ class InventoryBiasScene: SKScene {
         obj_18.name = "draggable-Cat"
         obj_19.name = "draggable-Dog"
         obj_20.name = "draggable-Dog"
-        
+        obj_21.name = "draggable-Object"
+        obj_22.name = "draggable-Object"
+        obj_23.name = "draggable-Object"
+        obj_24.name = "draggable-Object"
+        obj_25.name = "draggable-Object"
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
@@ -139,6 +152,7 @@ class InventoryBiasScene: SKScene {
                 let fullNameArr = nodeName.components(separatedBy: "-")
                 let firstName: String = fullNameArr[0]
                 if firstName == "draggable" {
+                    InitialLocation = location
                     self.currentNode = node
                 }
             }
@@ -165,9 +179,10 @@ class InventoryBiasScene: SKScene {
                     node.removeFromParent()
                     goneCats += 1
                 }
-                else if lastName == "Dog"{
+                else if lastName == "Dog" || lastName == "Object"{
                     SoundWrong()
                     topText.text = "That's not a cat!"
+                    node.position = InitialLocation
                 }
             }
             
@@ -180,9 +195,10 @@ class InventoryBiasScene: SKScene {
                         node.removeFromParent()
                         goneDogs += 1
                     }
-                    else if lastName == "Cat"{
+                    else if lastName == "Cat" || lastName == "Object"{
                         SoundWrong()
                         DogText.text = "That's not a dog!"
+                        node.position = InitialLocation
                 }
             }
         }
@@ -200,8 +216,8 @@ class InventoryBiasScene: SKScene {
     
     func createObj(){
         let obj: [SKSpriteNode] = [obj_1, obj_2, obj_21, obj_3, obj_4, obj_5,obj_22, obj_6, obj_7, obj_8, obj_9, obj_10, obj_23, obj_11, obj_12, obj_13, obj_14, obj_15, obj_16, obj_17,obj_24, obj_18, obj_19, obj_20, obj_25]
-        var x: Int = 360
-        var y: Int = 140
+        var x = width/3.316
+        var y = height/5.957
         for i in 0...24{
             obj[i].position = CGPoint(x: x , y: y)
     //        kiki.size = CGSize(width: 179, height: 251)
@@ -209,7 +225,7 @@ class InventoryBiasScene: SKScene {
             addChild(obj[i])
             x += 120
             if ((i + 1) % 5 == 0 && i != 0){
-                x = 360
+                x = width/3.316
                 y += 140
             }
         }

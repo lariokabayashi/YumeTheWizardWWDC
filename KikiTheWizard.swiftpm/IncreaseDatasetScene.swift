@@ -75,6 +75,7 @@ class IncreaseDatasetScene: SKScene {
         downloadingArray = [downloading,downloading2,downloading3, downloading4, downloading5, downloading6, downloading7, downloading8]
         
         wallpaper.position = CGPoint(x: view.frame.width / 2, y: view.frame.height / 2)
+        wallpaper.size = CGSize(width: 20000, height: 20000)
         addChild(wallpaper)
         
         background.position = CGPoint(x: view.frame.width / 2, y: view.frame.height / 2)
@@ -86,7 +87,7 @@ class IncreaseDatasetScene: SKScene {
         addChild(tv)
         tv.run(.repeatForever(.animate(with: animationIdleTv, timePerFrame: 1)))
         
-        screen.position = CGPoint(x: 575, y: 600)
+        screen.position = CGPoint(x: view.frame.width / 2.08, y: view.frame.height / 1.4)
         addChild(screen)
         screen.zPosition = -1
         screen.name = "screen"
@@ -97,7 +98,7 @@ class IncreaseDatasetScene: SKScene {
         
     
         for element in downloadingArray{
-            element.position = CGPoint(x: view.frame.width / 2, y: 600)
+            element.position = CGPoint(x: view.frame.width / 1.99, y: view.frame.height / 1.4)
             element.size = CGSize(width: element.frame.width * 4 , height: element.frame.height * 4)
             addChild(element)
             element.zPosition = -1
@@ -128,20 +129,20 @@ class IncreaseDatasetScene: SKScene {
         kiki.run(.repeatForever(.animate(with: animationIdleKiki, timePerFrame: 0.5)))
         
         cancel.text = "Cancel"
-        cancel.position = CGPoint(x: 705, y: 550)
+        cancel.position = CGPoint(x: view.frame.width/1.69361, y: view.frame.height/1.5163)
         addChild(cancel)
         cancel.zPosition = -1
         cancel.fontColor = UIColor(red: 248/255, green: 128/255, blue: 166/255, alpha: 1)
         cancel.fontSize = 15
         
         catVsDogs.text = "CatVsDogFiles"
-        catVsDogs.position = CGPoint(x: 515, y: 645)
+        catVsDogs.position = CGPoint(x: view.frame.width/2.318, y: view.frame.height/1.293)
         addChild(catVsDogs)
         catVsDogs.zPosition = -1
         catVsDogs.fontSize = 15
         
         download.text = "Downloading..."
-        download.position = CGPoint(x: 512, y: 615)
+        download.position = CGPoint(x: view.frame.width/2.318, y: view.frame.height/1.356)
         addChild(download)
         download.zPosition = -1
         download.fontColor = UIColor(red: 248/255, green: 128/255, blue: 166/255, alpha: 1)
@@ -170,6 +171,7 @@ class IncreaseDatasetScene: SKScene {
                 }
                  
                 else if touchedNode.name == "arrow" {
+                    SoundEnter()
                       if page == 0{
                           topText.text = "To download cat and dog images, click anywhere on the computer screen until the download finishes."
                           tv.removeFromParent()
@@ -192,5 +194,12 @@ class IncreaseDatasetScene: SKScene {
         let playAction = SKAction.play()
         audioNode.run(playAction)
     }
+    func SoundEnter(){
+        let audioNode = SKAudioNode(fileNamed: "media/enter")
+        audioNode.autoplayLooped = false
+        self.addChild(audioNode)
+        let playAction = SKAction.play()
+        audioNode.run(playAction)
     }
+}
 

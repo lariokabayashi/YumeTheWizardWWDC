@@ -93,6 +93,7 @@ class ImprovedModelScene: SKScene{
     override func didMove(to view: SKView) {
         
         wallpaper.position = CGPoint(x: view.frame.width / 2, y: view.frame.height / 2)
+        wallpaper.size = CGSize(width: 20000, height: 20000)
         addChild(wallpaper)
         
         background.position = CGPoint(x: view.frame.width / 2, y: view.frame.height / 2)
@@ -108,13 +109,15 @@ class ImprovedModelScene: SKScene{
         addChild(kiki)
         
         box.position = CGPoint(x: view.frame.width / 2.4, y: view.frame.height / 5.2)
+        box.zPosition = 5
         addChild(box)
         
         
-        board.position = CGPoint(x: 597, y: 750)
+        board.position = CGPoint(x: view.frame.width / 2, y: view.frame.height/1.15)
         addChild(board)
+        board.zPosition = 2
         
-        arrow.position = CGPoint(x: 1020, y: 730)
+        arrow.position = CGPoint(x: view.frame.width/1.17, y: view.frame.height/1.1424)
         addChild(arrow)
         arrow.name = "arrow"
         arrow.zPosition = 11
@@ -124,21 +127,22 @@ class ImprovedModelScene: SKScene{
         addChild(sparkles)
         
         topText.fontSize = 30
-        topText.position = CGPoint(x: 520, y: 745)
+        topText.position = CGPoint(x: view.frame.width/2, y: view.frame.height/1.17)
         topText.fontColor = UIColor.black
         topText.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
         topText.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
-        topText.preferredMaxLayoutWidth = 700
+        topText.preferredMaxLayoutWidth = 800
         topText.numberOfLines = 3
         addChild(topText)
         topText.text = "Nice! the box has been improved, now let's test it"
+        topText.zPosition = 2
         
         box.position = CGPoint(x: 597, y: 217)
         box.size = CGSize(width: 200, height: 200)
         box.run(.animate(with: animationIdleBox, timePerFrame: 1))
         
         kiki.run(.animate(with: animationIdleMagic, timePerFrame: 0.5))
-        kiki.zPosition = 1
+        kiki.zPosition = 5
        
         sparkles.zPosition = 1
         sparkles.run(.animate(with: animationIdleSparkles, timePerFrame: 0.3))
@@ -161,6 +165,7 @@ class ImprovedModelScene: SKScene{
             let location = touch.location(in: self)
             let touchedNode = atPoint(location)
             if touchedNode.name == "arrow" {
+                SoundEnter()
                 if page == 0{
                     topText.text = "Choose any cat or dog from the pixel world or the real world to test if the spell works."
                     page += 1
@@ -176,6 +181,13 @@ class ImprovedModelScene: SKScene{
     }
     func SoundMagic(){
         let audioNode = SKAudioNode(fileNamed: "media/magic")
+        audioNode.autoplayLooped = false
+        self.addChild(audioNode)
+        let playAction = SKAction.play()
+        audioNode.run(playAction)
+    }
+    func SoundEnter(){
+        let audioNode = SKAudioNode(fileNamed: "media/enter")
         audioNode.autoplayLooped = false
         self.addChild(audioNode)
         let playAction = SKAction.play()

@@ -26,6 +26,8 @@ class TestModelScene: SKScene{
     
     let box: SKSpriteNode = SKSpriteNode(imageNamed: "box-close")
     
+    let boxNotWorking: SKSpriteNode = SKSpriteNode(imageNamed: "Group 36")
+    
     let topText = SKLabelNode(fontNamed: "Pixelify Sans")
     let auxText1 = SKLabelNode(fontNamed: "Pixelify Sans")
     let auxText2 = SKLabelNode(fontNamed: "Pixelify Sans")
@@ -98,12 +100,25 @@ class TestModelScene: SKScene{
         SKTexture(imageNamed: "image 314")
     ]
     
+    let animationIdleBox: [SKTexture] = [
+        SKTexture(imageNamed: "Group 36"),
+        SKTexture(imageNamed: "Group 37"),
+        SKTexture(imageNamed: "Group 38"),
+        SKTexture(imageNamed: "Group 39")
+    ]
+    
     let tree: SKSpriteNode = SKSpriteNode(imageNamed: "tree")
     let flowers: SKSpriteNode = SKSpriteNode(imageNamed: "image 309")
     
+    var width: Double = 0
+    var height: Double = 0
+    
     override func didMove(to view: SKView) {
+        width = Double(view.frame.size.width)
+        height = Double(view.frame.size.height)
         
         wallpaper.position = CGPoint(x: view.frame.width / 2, y: view.frame.height / 2)
+        wallpaper.size = CGSize(width: 20000, height: 20000)
         addChild(wallpaper)
         
         background.position = CGPoint(x: view.frame.width / 2, y: view.frame.height / 2)
@@ -115,52 +130,57 @@ class TestModelScene: SKScene{
         ground.position = CGPoint(x: view.frame.width / 2.4, y: 160)
         addChild(ground)
         
-        kiki.position = CGPoint(x: view.frame.width / 2.4, y: view.frame.height / 2.5)
+        kiki.position = CGPoint(x: width / 2.2, y: height / 2)
 //        kiki.size = CGSize(width: 844, height: 844)
         addChild(kiki)
         
         box.position = CGPoint(x: view.frame.width / 2.4, y: view.frame.height / 5.2)
         addChild(box)
         
+        boxNotWorking.position = CGPoint(x: view.frame.width / 2.4, y: view.frame.height / 3.5)
+        addChild(boxNotWorking)
+        boxNotWorking.zPosition = -1
         
-        board.position = CGPoint(x: view.frame.width / 2.4, y: 720)
+        board.position = CGPoint(x: view.frame.width / 2.4, y: height/1.15)
         addChild(board)
+        board.zPosition = 2
         
         inventoryTest.position = CGPoint(x: view.frame.width / 1.1, y: view.frame.height/2)
         addChild(inventoryTest)
         
-        catTest1.position = CGPoint(x: view.frame.width / 1.075, y: 680)
+        catTest1.position = CGPoint(x: view.frame.width / 1.075, y: height/1.22)
         catTest1.name = "draggable-catTest1"
         addChild(catTest1)
         
-        contour.position = CGPoint(x: view.frame.width / 1.07, y: 680)
+        contour.position = CGPoint(x: view.frame.width / 1.07, y: height/1.22)
         addChild(contour)
         
-        catTest2.position = CGPoint(x: view.frame.width / 1.08, y: 500)
+        catTest2.position = CGPoint(x: view.frame.width / 1.08, y: height/1.66)
         catTest2.name = "draggable-catTest2"
         addChild(catTest2)
         
-        contour2.position = CGPoint(x: view.frame.width / 1.07, y: 500)
+        contour2.position = CGPoint(x: view.frame.width / 1.07, y: height/1.66)
         addChild(contour2)
         
-        catTest3.position = CGPoint(x: view.frame.width / 1.075, y: 320)
+        catTest3.position = CGPoint(x: view.frame.width / 1.075, y: height/2.6)
         catTest3.name = "draggable-catTest3"
         addChild(catTest3)
         
-        contour3.position = CGPoint(x: view.frame.width / 1.07, y: 320)
+        contour3.position = CGPoint(x: view.frame.width / 1.07, y: height/2.6)
         addChild(contour3)
         
-        catTest4.position = CGPoint(x: view.frame.width / 1.07, y: 140)
+        catTest4.position = CGPoint(x: view.frame.width / 1.07, y: height/6)
         catTest4.name = "draggable-catTest4"
         addChild(catTest4)
         
-        contour4.position = CGPoint(x: view.frame.width / 1.07, y: 140)
+        contour4.position = CGPoint(x: view.frame.width / 1.07, y: height/6)
         addChild(contour4)
         
-        arrow180.position = CGPoint(x: 1020, y: view.frame.height/2)
+        arrow180.position = CGPoint(x: width/1.187, y: height/2)
         addChild(arrow180)
+        arrow180.zPosition = -1
         
-        arrow.position = CGPoint(x: 920, y: 700)
+        arrow.position = CGPoint(x: width/1.3, y: height/1.1424)
         arrow.name = "arrow"
         addChild(arrow)
         arrow.zPosition = -1
@@ -176,7 +196,7 @@ class TestModelScene: SKScene{
         kikiBlink.zPosition = -1
         
         kikiLabel.text = "Kiki"
-        kikiLabel.position = CGPoint(x: 320, y: 610)
+        kikiLabel.position = CGPoint(x: width/3.7, y: height/1.35)
         kikiLabel.fontSize = 40
         kikiLabel.fontColor = UIColor.black
         kikiLabel.zPosition = -1
@@ -184,13 +204,14 @@ class TestModelScene: SKScene{
         
         topText.text = "Test it out by placing a cat in the box and observe the box's classification"
         topText.fontSize = 30
-        topText.position = CGPoint(x: 475, y: 685)
+        topText.position = CGPoint(x: 475, y: height/1.22)
         topText.fontColor = UIColor.black
         topText.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
         topText.lineBreakMode = NSLineBreakMode.byWordWrapping
         topText.preferredMaxLayoutWidth = 800
         topText.numberOfLines = 3
         addChild(topText)
+        topText.zPosition = 2
         
         auxText2.fontSize = 30
         auxText2.position = CGPoint(x: 750, y: 320)
@@ -218,13 +239,14 @@ class TestModelScene: SKScene{
             let location = touch.location(in: self)
             let touchedNode = atPoint(location)
             if touchedNode.name == "arrow" {
+                SoundEnter()
                 if page == 0{
-                    topText.position = CGPoint(x: 475, y: 680)
+                    topText.position = CGPoint(x: 475, y: height/1.22)
                     topText.text = "Did you notice? The box classified the cat as a dog, so it's not working correctly."
                     page += 1
                 }
                 else if page == 1{
-                    topText.position = CGPoint(x: 475, y: 695)
+                    topText.position = CGPoint(x: 475, y: height/1.2)
                     topText.text = "I think it's because I didn't apply interpretability."
                     page += 1
                 }
@@ -293,14 +315,18 @@ class TestModelScene: SKScene{
 
         if (page == 0){
             if let touch = touches.first, let node = currentNode {
-                if ((node.position.x > box.position.x - 50 && node.position.x < box.position.x + 50) && (node.position.y > box.position.y - 50 && node.position.y < box.position.y + 50) ){
+                if ((node.position.x > box.position.x - 100 && node.position.x < box.position.x + 100) && (node.position.y > box.position.y - 100 && node.position.y < box.position.y + 100) ){
                         SoundWrong()
                         let img = UIImage(cgImage: (node.texture?.cgImage())!)
                         let prediction = modelPredict(fileImg: img)
-                    topText.position = CGPoint(x: 475, y: 695)
-                    topText.text = "Box says: It's a " + prediction + "!"
-                        node.removeFromParent()
-                        arrow.zPosition = 1
+                        topText.position = CGPoint(x: 475, y: height/1.2)
+                        topText.text = "Box says: It's a " + prediction + "!"
+                        kiki.position = CGPoint(x: width / 2.2, y: height / 2)
+                        box.zPosition = -1
+                        boxNotWorking.zPosition = 1
+                        boxNotWorking.run(.repeatForever(.animate(with: animationIdleBox, timePerFrame: 0.2)))
+                            node.removeFromParent()
+                            arrow.zPosition = 3
                 }
             }
         }
@@ -325,6 +351,14 @@ class TestModelScene: SKScene{
     
     func SoundWrong(){
         let audioNode = SKAudioNode(fileNamed: "media/wrong")
+        audioNode.autoplayLooped = false
+        self.addChild(audioNode)
+        let playAction = SKAction.play()
+        audioNode.run(playAction)
+    }
+    
+    func SoundEnter(){
+        let audioNode = SKAudioNode(fileNamed: "media/enter")
         audioNode.autoplayLooped = false
         self.addChild(audioNode)
         let playAction = SKAction.play()

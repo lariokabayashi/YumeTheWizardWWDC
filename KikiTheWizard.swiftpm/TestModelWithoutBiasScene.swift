@@ -97,9 +97,15 @@ class TestModelWithoutBiasScene: SKScene{
     let meetTheAuthor: SKSpriteNode = SKSpriteNode(imageNamed: "meetTheAuthor")
     let button1: SKSpriteNode = SKSpriteNode(imageNamed: "button")
     let button2: SKSpriteNode = SKSpriteNode(imageNamed: "button")
+    var width: Double = 0
+    var height: Double = 0
     
     override func didMove(to view: SKView) {
+        width = view.frame.size.width
+        height = view.frame.size.height
+        
         wallpaper.position = CGPoint(x: view.frame.width / 2, y: view.frame.height / 2)
+        wallpaper.size = CGSize(width: 20000, height: 20000)
         addChild(wallpaper)
         
         background.position = CGPoint(x: view.frame.width / 2, y: view.frame.height / 2)
@@ -123,8 +129,9 @@ class TestModelWithoutBiasScene: SKScene{
         addChild(box)
         
         
-        board.position = CGPoint(x: view.frame.width / 2.4, y: 720)
+        board.position = CGPoint(x: view.frame.width / 2.4, y: height/1.1583)
         addChild(board)
+        board.zPosition = 2
         
         inventoryTest.position = CGPoint(x: view.frame.width / 1.1, y: view.frame.height/2)
         addChild(inventoryTest)
@@ -135,8 +142,9 @@ class TestModelWithoutBiasScene: SKScene{
         arrow180.position = CGPoint(x: 1020, y: view.frame.height/2)
         arrow180.name = "arrow180"
         addChild(arrow180)
+        arrow180.zPosition = -1
         
-        arrow.position = CGPoint(x: 920, y: 700)
+        arrow.position = CGPoint(x: width/1.2978, y: height/1.1424)
         arrow.name = "arrow"
         addChild(arrow)
         arrow.zPosition = -1
@@ -152,21 +160,22 @@ class TestModelWithoutBiasScene: SKScene{
         kikiBlink.zPosition = -1
         
         kikiLabel.text = "Kiki"
-        kikiLabel.position = CGPoint(x: 320, y: 610)
+        kikiLabel.position = CGPoint(x: width/3.73, y: height/1.367)
         kikiLabel.fontSize = 40
         kikiLabel.fontColor = UIColor.black
         kikiLabel.zPosition = -1
         addChild(kikiLabel)
         
-        topText.text = "Let's see if it works, put a cat or a dog inside the box."
+        topText.text = "Let's test it out. Place either the cat or the dog you've selected inside the box and see how it goes"
         topText.fontSize = 30
-        topText.position = CGPoint(x: 480, y: 710)
+        topText.position = CGPoint(x: width/2.4875, y: height/1.1746)
         topText.fontColor = UIColor.black
         topText.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
         topText.lineBreakMode = NSLineBreakMode.byWordWrapping
         topText.preferredMaxLayoutWidth = 800
         topText.numberOfLines = 3
         addChild(topText)
+        topText.zPosition = 2
         
         tree.position = CGPoint(x: 170, y: 500)
         addChild(tree)
@@ -183,44 +192,47 @@ class TestModelWithoutBiasScene: SKScene{
         addChild(meetTheAuthor)
         meetTheAuthor.zPosition = -1
         
-        button1.position = CGPoint(x: view.frame.width/2, y: 500)
+        button1.position = CGPoint(x: width/2, y: height/1.668)
         addChild(button1)
         button1.zPosition = -1
         button1.name = "button1"
         
-        button2.position = CGPoint(x: view.frame.width/2, y: 650)
+        button2.position = CGPoint(x: width/2, y: height/1.283)
         addChild(button2)
         button2.zPosition = -1
         button2.name = "button2"
         
-        auxText1.position = CGPoint(x: view.frame.width/2, y: 490)
+        auxText1.position = CGPoint(x: width/2, y: height/1.7)
         addChild(auxText1)
         auxText1.zPosition = -1
         auxText1.fontSize = 30
         auxText1.fontColor = .black
         
-        auxText2.position = CGPoint(x: view.frame.width/2, y: 640)
+        auxText2.position = CGPoint(x: width/2, y: height/1.3)
         addChild(auxText2)
         auxText2.zPosition = -1
         auxText2.fontSize = 30
         auxText2.fontColor = .black
+        
+        spriteSel?.position = CGPoint(x: width/1.066, y: height/2)
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let location = touch.location(in: self)
             let touchedNode = atPoint(location)
             if touchedNode.name == "arrow" {
+                SoundEnter()
                 if page == 1{
                     comment.zPosition = 0
                     kikiLabel.zPosition = 0
                     kikiBlink.zPosition = 0
-                    arrow.position = CGPoint(x: 1000, y: 250)
-                    arrow.zPosition = 1
+                    arrow.position = CGPoint(x: width/1.194, y: height/3.336)
+                    arrow.zPosition = 3
                     board.zPosition = -1
                     tree.zPosition = -1
                     bee.zPosition = -1
                     flowers.zPosition = -1
-                    topText.position = CGPoint(x: 750, y: 400)
+                    topText.position = CGPoint(x: width/1.592, y: height/2.085)
                     topText.fontSize = 30
                     topText.text = "Great! Keep in mind that the model is still susceptible to errors. Consistently monitoring and enhancing its performance in production to identify and address biases is an ongoing task"
                     topText.preferredMaxLayoutWidth = 600
@@ -258,6 +270,7 @@ class TestModelWithoutBiasScene: SKScene{
                 }
             }
             else if touchedNode.name == "button2"{
+                SoundClick()
                 let scene = buildYourAnimalScene()
                 scene.size = CGSize(width: scene.size.width, height: scene.size.height)
                 scene.scaleMode = .resizeFill
@@ -265,6 +278,7 @@ class TestModelWithoutBiasScene: SKScene{
                 page += 1
             }
             else if touchedNode.name == "button1"{
+                SoundClick()
                 meetTheAuthor.zPosition = 3
                 arrow180.zPosition = 4
                 arrow180.position = CGPoint(x: 110, y: arrow180.position.y)
@@ -302,9 +316,15 @@ class TestModelWithoutBiasScene: SKScene{
             if let touch = touches.first, let node = currentNode {
                 if ((node.position.x > box.position.x - 200 && node.position.x < box.position.x + 200) && (node.position.y > box.position.y - 200 && node.position.y < box.position.y + 200) ){
                     let img = UIImage(cgImage: (spriteSel?.texture?.cgImage())!)
-                    arrow.zPosition = 0
+                    arrow.zPosition = 3
                     let prediction = modelPredict(fileImg: img)
                     topText.text = "Box says: It's a " + prediction + "!"
+                    if prediction == "Cat"{
+                        SoundMeow()
+                    }
+                    else if prediction == "Dog"{
+                        SoundBark()
+                    }
                     node.removeFromParent()
                     page += 1
                 }
@@ -330,12 +350,40 @@ class TestModelWithoutBiasScene: SKScene{
     }
     func addSelectedImg(sprite: SKSpriteNode?) {
         spriteSel = sprite
-        spriteSel?.position = CGPoint(x: 1120, y: 417)
         spriteSel?.zPosition = 11
         spriteSel?.name = "draggable"
+        spriteSel?.removeFromParent()
         addChild(spriteSel!)
         if spriteSel?.size.height ?? 100 > 200 || spriteSel?.size.width ?? 100 > 200{
             spriteSel?.size = CGSize(width: 150, height: 150)
         }
+    }
+    func SoundMeow(){
+        let audioNode = SKAudioNode(fileNamed: "media/meow")
+        audioNode.autoplayLooped = false
+        self.addChild(audioNode)
+        let playAction = SKAction.play()
+        audioNode.run(playAction)
+    }
+    func SoundBark(){
+        let audioNode = SKAudioNode(fileNamed: "media/dogBark")
+        audioNode.autoplayLooped = false
+        self.addChild(audioNode)
+        let playAction = SKAction.play()
+        audioNode.run(playAction)
+    }
+    func SoundClick(){
+        let audioNode = SKAudioNode(fileNamed: "media/click")
+        audioNode.autoplayLooped = false
+        self.addChild(audioNode)
+        let playAction = SKAction.play()
+        audioNode.run(playAction)
+    }
+    func SoundEnter(){
+        let audioNode = SKAudioNode(fileNamed: "media/enter")
+        audioNode.autoplayLooped = false
+        self.addChild(audioNode)
+        let playAction = SKAction.play()
+        audioNode.run(playAction)
     }
 }

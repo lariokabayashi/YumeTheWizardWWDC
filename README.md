@@ -33,7 +33,7 @@ For the 2024 WWDC scholarship competition, applicants were tasked with creating 
 
 ## Screenshots
 
-![App Screenshot](../images/YumeTheWizard.png)
+![App Screenshot](YumeTheWizard.png)
 
 ## Impact and Recognition
 
